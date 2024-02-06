@@ -6,11 +6,16 @@ const CampaignListItem = () => {
   return (
     <Link href='campaigns/45a54668'>
       <Card className='hover:border hover:shadow-xl hover:shadow-primary/5 transition-colors hover:border-primary/80 flex flex-col'>
-        <div className='flex justify-between items-start gap-2 p-4 border-b'>
-          <h3 className='font-bold text-lg leading-tight'>
-            Senior React Frontend Developer
-          </h3>
-          <Badge>Running</Badge>
+        <div className='p-4 border-b'>
+          <div className='flex justify-between items-start gap-2'>
+            <h3 className='font-bold text-lg leading-tight'>
+              Senior React Frontend Developer
+            </h3>
+            <Badge>Running</Badge>
+          </div>
+          <span className='font-medium text-sm opacity-70 text-right'>
+            Tuesday, 13th Apr 20PM
+          </span>
         </div>
         <div className='p-4 flex flex-col gap-4'>
           <div>

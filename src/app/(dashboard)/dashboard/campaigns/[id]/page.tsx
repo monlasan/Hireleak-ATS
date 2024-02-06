@@ -30,50 +30,52 @@ const Campaign = async () => {
   const applicants = await getData();
 
   return (
-    <div>
-      <MaxWidthWrapper>
-        <div className='py-6 pt-8 flex flex-col gap-6'>
-          <div className='flex justify-between gap-3'>
-            <h1 className='text-3xl font-bold text-foreground'>
-              Senior FrontEnd Developer
-            </h1>
-            <div className='flex items-center gap-3'>
-              <Button variant='white'>Update campaign</Button>
-              <Button variant='destructive'>Cancel campaign</Button>
-            </div>
-          </div>
-          <div className='flex flex-col md:flex-row gap-4'>
-            <CampaignGeneralInformations />
-            <div className='flex flex-col gap-4 flex-1'>
-              <Card className='p-6'>
-                <div>
-                  <h3 className='font-bold mb-2 text-lg text-foreground'>
-                    Campaign portal
-                  </h3>
-                  <CampaignPortalClipboard url='https://embauch.io/campaigns/728ed52f/senior-frontend-software-engineer/' />
-                </div>
-              </Card>
-              <Card className=''>
-                <CardHeader>
-                  <div className='flex items-center justify-between gap-3'>
-                    <h3 className='font-bold mb-2 text-lg text-foreground'>
-                      Applicants (20)
-                    </h3>
-                    <Button size='sm' variant='outline'>
-                      <Download className='mr-2' size={21} />
-                      Export to CSV
-                    </Button>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <DataTable columns={ApplicantsColumnDef} data={applicants} />
-                </CardContent>
-              </Card>
-            </div>
+    <MaxWidthWrapper>
+      <div className='py-6 pt-8 flex flex-col gap-6'>
+        <div className='flex justify-between gap-3'>
+          <h1 className='text-3xl font-bold text-foreground'>
+            Senior FrontEnd Developer
+          </h1>
+          <div className='flex items-center gap-3'>
+            <Button size='sm' variant='white'>
+              Update campaign
+            </Button>
+            <Button size='sm' variant='destructive'>
+              Cancel campaign
+            </Button>
           </div>
         </div>
-      </MaxWidthWrapper>
-    </div>
+        <div className='flex flex-col md:flex-row gap-4'>
+          <CampaignGeneralInformations />
+          <div className='flex flex-col gap-4 flex-1'>
+            <Card className='p-6'>
+              <div>
+                <h3 className='font-bold mb-2 text-lg text-foreground'>
+                  Campaign portal
+                </h3>
+                <CampaignPortalClipboard url='https://embauch.io/campaigns/728ed52f/senior-frontend-software-engineer/' />
+              </div>
+            </Card>
+            <Card>
+              <CardHeader>
+                <div className='flex flex-wrap items-center justify-between gap-3'>
+                  <h3 className='font-bold mb-2 text-lg text-foreground'>
+                    Applicants (20)
+                  </h3>
+                  <Button size='sm' variant='outline'>
+                    <Download className='mr-2' size={21} />
+                    Export to CSV
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <DataTable columns={ApplicantsColumnDef} data={applicants} />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </MaxWidthWrapper>
   );
 };
 

@@ -18,9 +18,17 @@ const CampaignGeneralInformations = () => {
       <h3 className='font-bold text-lg text-foreground p-4'>
         General informations
       </h3>
-      <div className='flex items-center justify-between py-3 px-4'>
-        <b className='opacity-50 text-sm'>Status:</b>
-        <Badge>Running</Badge>
+      <div className='py-3 px-4 flex flex-col gap-2'>
+        <div className='flex items-center justify-between '>
+          <b className='opacity-50 text-sm'>Status:</b>
+          <Badge>Running</Badge>
+        </div>
+        <div className='flex items-center justify-between '>
+          <b className='opacity-50 text-sm'>Created at:</b>
+          <span className='font-medium text-sm opacity-70 text-right'>
+            Tuesday, 13th Apr 20PM
+          </span>
+        </div>
       </div>
       <div className='py-3 px-4'>
         <div className='flex items-center justify-between'>

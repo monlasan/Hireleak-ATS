@@ -2,8 +2,9 @@ import CampaignsList from '@/components/CampaignsList';
 import CampaignsListSearch from '@/components/CampaignsListSearch';
 import CampaignsListStatusFilter from '@/components/CampaignsListStatusFilter';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 const Campaigns = () => {
@@ -15,10 +16,10 @@ const Campaigns = () => {
             <CampaignsListSearch />
             <div className='flex  items-center gap-3'>
               <CampaignsListStatusFilter />
-              <Button>
+              <Link className={buttonVariants()} href='/dashboard/new/campaign'>
                 <Plus className='mr-2' />
                 Create campaign
-              </Button>
+              </Link>
             </div>
           </div>
           <CampaignsList />

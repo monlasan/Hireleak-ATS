@@ -22,9 +22,11 @@ const CampaignPortalClipboard = ({ url }: { url: string }) => {
 
   return (
     <div className='p-2 px-3 border flex items-center gap-2 bg-zinc-50 rounded'>
-      <LinkIcon size={18} className='text-zinc-600' />
+      <div>
+        <LinkIcon size={18} className='text-zinc-600' />
+      </div>
       <Link
-        href='/'
+        href={url}
         target='_blank'
         className='text-primary hover:underline max-w-sm overflow-hidden truncate'
       >

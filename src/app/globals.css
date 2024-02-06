@@ -61,3 +61,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.ProseMirror {
+  outline: none;
+  min-height: 100px;
+}

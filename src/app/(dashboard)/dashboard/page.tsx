@@ -1,11 +1,13 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Plus } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 const Dashboard = () => {
   return (
-    <div>
+    <>
       <div className='bg-zinc-800'>
         <MaxWidthWrapper>
           <div className='pt-10 pb-24 flex flex-col gap-4'>
@@ -21,17 +23,14 @@ const Dashboard = () => {
                 </p>
               </div>
               {/* <div className='flex flex-col md:justify-end md:items-end'> */}
-              <div className='flex flex-col'>
-                <Badge
-                  variant='outline'
-                  className='mr-auto md:ml-auto md:mr-0 text-zinc-100  text-sm'
+              <div className='flex flex-col md:items-end md:justify-end'>
+                <Link
+                  className={buttonVariants()}
+                  href='/dashboard/new/campaign'
                 >
-                  {new Date().toLocaleDateString('en-us', {
-                    day: '2-digit',
-                    year: 'numeric',
-                    month: 'long',
-                  })}
-                </Badge>
+                  <Plus className='mr-2' />
+                  Create new campaign
+                </Link>
               </div>
             </div>
           </div>
@@ -52,7 +51,7 @@ const Dashboard = () => {
           </Card>
         </div>
       </MaxWidthWrapper>
-    </div>
+    </>
   );
 };
 
