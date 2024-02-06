@@ -17,7 +17,7 @@ const Campaigns = () => {
               <CampaignsListStatusFilter />
               <Button>
                 <Plus className='mr-2' />
-                Create campaign
+                Create campaign.
               </Button>
             </div>
           </div>
