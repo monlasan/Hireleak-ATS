@@ -29,22 +29,26 @@ import { toast } from 'sonner';
 import TiptapEditor from './TipTapEditor';
 import { Card } from './ui/card';
 
+/**
+ * TODO: For the date inputs, add logic to make sure that the end date is always after the start date.
+ */
+
 const formSchema = z.object({
-  title: z.string().min(1, 'Please enter a title'),
+  name: z.string().min(1, 'Please enter a name for the campaign.'),
   start_date: z.date({
     required_error: 'A starting date is required.',
   }),
   end_date: z.date({
     required_error: 'An end date is required.',
   }),
-  limit: z
-    .string()
-    .min(1, 'Please enter a limit of applicants.')
-    .max(400, 'You cannot exceed 400 applicants'),
+  limit: z.coerce
+    .number()
+    .lte(500, 'You cannot exceed 500 applicants.')
+    .gte(1, 'Please enter a limit of applicants.'),
   acceptance_percentage: z
-    .string()
-    .min(1, 'Please enter an acceptance percentage for the campaign.')
-    .max(100, 'You cannot exceed 100%'),
+    .number()
+    .lte(100, 'Tou cannot exceed 100%.')
+    .gte(1, 'Please enter an acceptance percentage for the campaign.'),
 });
 
 const NewCampaignForm = () => {
@@ -60,14 +64,19 @@ const NewCampaignForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: '',
-      limit: '',
-      acceptance_percentage: '',
+      name: '',
+      limit: 1,
+      acceptance_percentage: 1,
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (editorText.length === 0) {
+    console.log('editorText', editorText);
+    if (
+      !editorText ||
+      editorText === '<p></p>' ||
+      editorText === '<p><br></p>'
+    ) {
       setNoJobDescription((v) => (v = true));
       return;
     }
@@ -90,7 +99,7 @@ const NewCampaignForm = () => {
       <div className='flex flex-wrap items-center gap-3 justify-between'>
         <h1 className='text-3xl font-semibold'>New campaign</h1>
         <Button
-          className='ml-auto'
+          className='w-full sm:w-auto'
           disabled={isSubmitting}
           onClick={form.handleSubmit(onSubmit)}
         >
@@ -108,7 +117,7 @@ const NewCampaignForm = () => {
             <form className='flex flex-col gap-3'>
               <FormField
                 control={form.control}
-                name='title'
+                name='name'
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Campaign name</FormLabel>
@@ -218,6 +227,8 @@ const NewCampaignForm = () => {
                           placeholder='Enter a limit of applicants'
                           {...field}
                           type='number'
+                          min='1'
+                          max='100'
                         />
                       </FormControl>
                       <FormMessage />
