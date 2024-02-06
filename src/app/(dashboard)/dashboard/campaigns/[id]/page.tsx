@@ -1,11 +1,34 @@
-import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Eye, PowerOff, Trash2 } from 'lucide-react';
 import React from 'react';
+import CampaignGeneralInformations from '@/components/CampaignGeneralInformations';
+import MaxWidthWrapper from '@/components/MaxWidthWrapper';
+import { DataTable } from '@/components/data-table';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Copy, Download, Link as LinkIcon } from 'lucide-react';
+import {
+  columns as ApplicantsColumnDef,
+  Payment,
+} from '@/components/DatatableApplicantsColumnDef';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import CampaignPortalClipboard from '@/components/CampaignPortalClipboard';
 
-const Campaign = () => {
+async function getData(): Promise<Payment[]> {
+  // Fetch data from your API here.
+  return [
+    {
+      id: '728ed52f',
+      amount: 100,
+      status: 'pending',
+      email: 'm@example.com',
+    },
+    // ...
+  ];
+}
+
+const Campaign = async () => {
+  const applicants = await getData();
+
   return (
     <div>
       <MaxWidthWrapper>
@@ -20,62 +43,31 @@ const Campaign = () => {
             </div>
           </div>
           <div className='flex flex-col md:flex-row gap-4'>
-            <Card className='p-4 pb-5 flex-1 md:max-w-80 flex flex-col gap-4'>
-              <h3 className='font-bold text-lg text-foreground'>
-                General informations
-              </h3>
-              <div className='flex items-center justify-between'>
-                <b className='opacity-50 text-sm'>Status:</b>
-                <Badge>Running</Badge>
-              </div>
-              <div>
-                <div className='flex items-center justify-between'>
-                  <b className='opacity-50 text-sm'>Start date:</b>
-                  <span className='font-medium text-right'>
-                    Tuesday, 13th Apr 20PM
-                  </span>
-                </div>
-                <div className='flex items-center justify-between'>
-                  <b className='opacity-50 text-sm'>End date:</b>
-                  <span className='font-medium text-right'>
-                    Friday, 21th Apr 20PM
-                  </span>
-                </div>
-              </div>
-              <div className='flex flex-col gap-2'>
-                <div className='flex items-center justify-between'>
-                  <b className='opacity-50 text-sm'>Limit:</b>
-                  <Badge variant='secondary' className='text-base'>
-                    42
-                  </Badge>
-                </div>
-                <div className='flex items-center justify-between'>
-                  <b className='opacity-50 text-sm'>Acceptance:</b>
-                  <Badge variant='secondary' className='text-base'>
-                    85%
-                  </Badge>
-                </div>
-              </div>
-              <Button className='text-center'>
-                <Eye className='mr-2' /> See job description
-              </Button>
-            </Card>
+            <CampaignGeneralInformations />
             <div className='flex flex-col gap-4 flex-1'>
-              <Card className='p-4'>
+              <Card className='p-6'>
                 <div>
                   <h3 className='font-bold mb-2 text-lg text-foreground'>
                     Campaign portal
                   </h3>
-                  DATATALBE
+                  <CampaignPortalClipboard url='https://embauch.io/campaigns/728ed52f/senior-frontend-software-engineer/' />
                 </div>
               </Card>
-              <Card className='p-4'>
-                <div>
-                  <h3 className='font-bold mb-2 text-lg text-foreground'>
-                    Applicants (20)
-                  </h3>
-                  DATATALBE
-                </div>
+              <Card className=''>
+                <CardHeader>
+                  <div className='flex items-center justify-between gap-3'>
+                    <h3 className='font-bold mb-2 text-lg text-foreground'>
+                      Applicants (20)
+                    </h3>
+                    <Button size='sm' variant='outline'>
+                      <Download className='mr-2' size={21} />
+                      Export to CSV
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <DataTable columns={ApplicantsColumnDef} data={applicants} />
+                </CardContent>
               </Card>
             </div>
           </div>

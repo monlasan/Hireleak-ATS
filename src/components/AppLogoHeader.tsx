@@ -1,11 +1,13 @@
-import React from 'react';
+import Link from 'next/link';
 
 const AppLogoHeader = () => {
   return (
-    <div className='flex items-center gap-3'>
-      <div className='h-8 w-8 bg-primary justify-center rounded items-center flex text-violet-700 font-black'></div>
-      <span className='text-lg font-medium text-white'>embauch</span>
-    </div>
+    <Link href='/dashboard' className='flex items-center gap-2'>
+      <div className='h-8 w-8 bg-primary justify-center rounded items-center flex text-white font-black'>
+        <span className='-rotate-12 text-xl'>em</span>
+      </div>
+      <span className='text-xs font-medium text-white'>embauch</span>
+    </Link>
   );
 };
 
