@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Quicksand } from 'next/font/google';
+import { Quicksand, Poppins } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
 import { Toaster } from '@/components/ui/sonner';
@@ -7,6 +7,11 @@ import Providers from '@/components/Providers';
 
 const quicksand = Quicksand({
   weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+});
+
+const poppins = Poppins({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
 });
 
@@ -22,8 +27,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' suppressHydrationWarning className='relative'>
-      <body className={quicksand.className}>
-        <div className='flex text-xs items-center gap-4 fixed bottom-0 left-0 right-0 bg-zinc-100'>
+      <body className={poppins.className}>
+        <div className='flex text-xs items-center gap-4 fixed bottom-0 left-0 right-0 bg-zinc-50/10'>
           <Link href='/'>Home</Link>
           <Link href='/dashboard'>Dashboard</Link>
           <Link href='/sign-in'>SignIn</Link>

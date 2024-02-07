@@ -119,7 +119,7 @@ const NewCampaignForm = () => {
                 control={form.control}
                 name='name'
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className='mb-1'>
                     <FormLabel>Campaign name</FormLabel>
                     <FormControl>
                       <Input

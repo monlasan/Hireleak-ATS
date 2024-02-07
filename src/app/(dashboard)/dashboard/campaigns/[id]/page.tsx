@@ -31,9 +31,9 @@ const Campaign = async () => {
 
   return (
     <MaxWidthWrapper>
-      <div className='py-6 pt-8 flex flex-col gap-6'>
+      <div className='py-16 pt-8 flex flex-col gap-6'>
         <div className='flex justify-between gap-3'>
-          <h1 className='text-3xl font-bold text-foreground'>
+          <h1 className='text-3xl font-semibold text-foreground'>
             Senior FrontEnd Developer
           </h1>
           <div className='flex items-center gap-3'>
@@ -48,29 +48,29 @@ const Campaign = async () => {
         <div className='flex flex-col md:flex-row gap-4'>
           <CampaignGeneralInformations />
           <div className='flex flex-col gap-4 flex-1'>
-            <Card className='p-6'>
+            <Card className='p-4'>
               <div>
-                <h3 className='font-bold mb-2 text-lg text-foreground'>
+                <h3 className='font-medium mb-2 text-lg text-foreground'>
                   Campaign portal
                 </h3>
                 <CampaignPortalClipboard url='https://embauch.io/campaigns/728ed52f/senior-frontend-software-engineer/' />
               </div>
             </Card>
-            <Card>
-              <CardHeader>
-                <div className='flex flex-wrap items-center justify-between gap-3'>
-                  <h3 className='font-bold mb-2 text-lg text-foreground'>
-                    Applicants (20)
-                  </h3>
-                  <Button size='sm' variant='outline'>
-                    <Download className='mr-2' size={21} />
-                    Export to CSV
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <DataTable columns={ApplicantsColumnDef} data={applicants} />
-              </CardContent>
+            <Card className='p-4'>
+              {/* <CardHeader> */}
+              <div className='flex mb-4 flex-wrap items-center justify-between gap-3'>
+                <h3 className='font-medium text-lg text-foreground'>
+                  Applicants (20)
+                </h3>
+                <Button size='sm' variant='outline'>
+                  <Download className='mr-2' size={21} />
+                  Export to CSV
+                </Button>
+              </div>
+              {/* </CardHeader> */}
+              {/* <CardContent> */}
+              <DataTable columns={ApplicantsColumnDef} data={applicants} />
+              {/* </CardContent> */}
             </Card>
           </div>
         </div>

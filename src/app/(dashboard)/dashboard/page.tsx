@@ -37,11 +37,12 @@ const Dashboard = () => {
         </MaxWidthWrapper>
       </div>
       <MaxWidthWrapper>
-        <div className='flex flex-col -mt-14 gap-4'>
-          {/* <div className='grid grid-cols-3 -mt-12 gap-4'> */}
-          <div className='flex flex-wrap gap-4'>
+        <div className='flex flex-col -mt-16 md:-mt-14 gap-4'>
+          <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-4'>
+            {/* <div className='flex flex-wrap gap-4'> */}
             {[1, 2, 3].map((i) => (
-              <Card className='p-6 h-40 min-w-[250px] flex-1' key={i}>
+              // <Card className='p-6 h-40 min-w-[328px] flex-1' key={i}>
+              <Card className='p-6 h-40 flex-1' key={i}>
                 <p>Lorem ipsum</p>
               </Card>
             ))}

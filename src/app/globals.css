@@ -56,10 +56,67 @@
   }
   html {
     min-width: 360px;
+    height: 100%;
   }
   body {
     @apply bg-background text-foreground;
+    height: 100%;
   }
+}
+
+.noise-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background: url('/noise_dark.png');
+  background-size: 5%;
+}
+.my-radial-bg {
+  /* global 92%+ browsers support */
+  /* background: radial-gradient(
+    circle at 53% 100%,
+    rgba(0, 44, 255, 0.72) 0%,
+    rgba(72, 160, 255, 1) 25%,
+    rgba(0, 130, 255, 0.5) 42%,
+    rgba(255, 255, 255, 1) 72%,
+    rgba(255, 255, 255, 1) 100%
+  ); */
+  /* background: radial-gradient(
+    circle at 29% 93%,
+    rgba(0, 44, 255, 0.72) 0%,
+    rgba(72, 160, 255, 1) 25%,
+    rgba(0, 130, 255, 0.5) 42%,
+    rgba(255, 255, 255, 1) 72%,
+    rgba(255, 255, 255, 1) 100%
+  ); */
+
+  /* background: radial-gradient(
+    circle at 51% 0%,
+    rgba(0, 11, 255, 0.72) 0%,
+    rgba(6, 0, 255, 0.73) 10%,
+    rgba(63, 114, 255, 1) 25%,
+    rgba(255, 255, 255, 1) 67%,
+    rgba(255, 255, 255, 1) 100%
+  ); */
+
+  /* background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(0, 11, 255, 0.72) 0%,
+    rgba(6, 0, 255, 0.73) 10%,
+    rgba(63, 114, 255, 1) 30%,
+    rgba(255, 255, 255, 1) 74%,
+    rgba(255, 255, 255, 1) 100%
+  ); */
+
+  background: radial-gradient(
+    ellipse at 45% 90%,
+    rgb(28, 1, 233) 0%,
+    /* rgba(51, 0, 255, 0.73) 10%, */ rgb(58, 16, 248) 10%,
+    rgb(98, 63, 255) 30%,
+    rgb(255, 255, 255, 0) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .ProseMirror {

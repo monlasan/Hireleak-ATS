@@ -7,7 +7,7 @@ import React from 'react';
 const NewCampaign = () => {
   return (
     <MaxWidthWrapper>
-      <div className='pt-10 pb-24 flex flex-col gap-4'>
+      <div className='pt-10 pb-18 flex flex-col gap-4'>
         <NewCampaignForm />
       </div>
     </MaxWidthWrapper>

@@ -11,7 +11,7 @@ const Campaigns = () => {
   return (
     <div>
       <MaxWidthWrapper>
-        <div className='py-6 pt-8 flex flex-col gap-6'>
+        <div className='py-16 pt-8 flex flex-col gap-6'>
           <div className='flex flex-wrap items-center gap-3'>
             <CampaignsListSearch />
             <div className='flex  items-center gap-3'>
