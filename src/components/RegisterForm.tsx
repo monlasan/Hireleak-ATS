@@ -25,14 +25,14 @@ import Link from 'next/link';
 
 const formSchema = z
   .object({
-    org_name: z.string().min(1, 'Please enter a name for the organization.'),
-    first_name: z.string().min(1, 'Please enter a your first name.').max(20),
-    last_name: z.string().min(1, 'Please enter a your last name.').max(20),
-    email: z.string().email('Please enter a valid email'),
-    password: z
+    org_name: z.string().min(1, 'Enter a name for the organization.'),
+    first_name: z.string().min(1, 'Enter a your first name.').max(20),
+    last_name: z.string().min(1, 'Enter a your last name.').max(20),
+    email: z.string().email('Enter a valid email'),
+    password: z.string().min(6, { message: 'Must be at least 6 characters.' }),
+    confirm_password: z
       .string()
-      .min(6, { message: 'Password must be at least 6 characters.' }),
-    confirm_password: z.string(),
+      .min(6, { message: 'Must be at least 6 characters.' }),
     privacy: z.boolean().default(false),
   })
   .refine((data) => data.password === data.confirm_password, {
@@ -166,17 +166,17 @@ const RegisterForm = () => {
 
   return (
     <div className='w-full max-w-xl'>
-      <div className='mb-6 flex items-center gap-2'>
-        <hr className='border border-zinc-200 flex-1' />
+      <div className='mb-6 flex items-center justify-center gap-2'>
+        <hr className='border hidden sm:inline border-zinc-200 flex-1' />
         <h1 className='text-zinc-800 font-medium text-xl text-center'>
           Create an account
         </h1>
-        <hr className='border border-zinc-200 flex-1' />
+        <hr className='border hidden sm:inline border-zinc-200 flex-1' />
       </div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-3 w-full'
+          className='space-y-6 sm:space-y-6 w-full'
         >
           <div className='flex flex-col items-center gap-4 w-full justify-center'>
             <div className='flex items-center justify-center gap-3 flex-col'>
@@ -188,7 +188,7 @@ const RegisterForm = () => {
               />
               <div
                 className={cn(
-                  'w-[110px] h-[110px] flex justify-center cursor-pointer hover:scale-105 transition-transform items-center border border-dashed overflow-hidden rounded-full',
+                  'w-[110px] h-[110px] bg-white/50 flex justify-center cursor-pointer hover:scale-105 transition-transform items-center border border-dashed overflow-hidden rounded-full',
                   isOver && 'opacity-70 scale-105',
                   loading && 'select-none opacity-70 pointer-events-none'
                 )}
@@ -202,25 +202,26 @@ const RegisterForm = () => {
                   alt='Organization logo placeholder image'
                   width={110}
                   height={110}
-                  className='object-contain object-center opacity-70'
+                  className={cn(
+                    'object-contain opacity-70',
+                    Object.keys(file).length > 0 && 'opacity-100'
+                  )}
                 />
               </div>
-              <Button
-                variant='ghost'
-                size='sm'
-                onClick={() => handleClick}
-                className='text-center text-xs opacity-70'
+              <div
+                onClick={() => fileInputRef.current.click()}
+                className='text-center cursor-pointer text-xs opacity-70'
               >
                 Drop your organization logo here, <br /> you can also click to
                 select.
-              </Button>
+              </div>
             </div>
 
             <FormField
               control={form.control}
               name='org_name'
               render={({ field }) => (
-                <FormItem className='w-full'>
+                <FormItem className='relative w-full'>
                   <FormLabel className='text-zinc-600'>Organization</FormLabel>
                   <FormControl>
                     <Input
@@ -230,17 +231,17 @@ const RegisterForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className='absolute top-0 translate-y-[66px] left-0' />
                 </FormItem>
               )}
             />
           </div>
-          <div className='flex flex-col sm:flex-row items-center gap-4'>
+          <div className='flex flex-col sm:flex-row items-center gap-4 gap-y-6'>
             <FormField
               control={form.control}
               name='first_name'
               render={({ field }) => (
-                <FormItem className='flex-1 w-full'>
+                <FormItem className='relative flex-1 w-full'>
                   <FormLabel className='text-zinc-600'>First name</FormLabel>
                   <FormControl>
                     <Input
@@ -250,7 +251,7 @@ const RegisterForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className='absolute top-0 translate-y-[66px] left-0' />
                 </FormItem>
               )}
             />
@@ -258,7 +259,7 @@ const RegisterForm = () => {
               control={form.control}
               name='last_name'
               render={({ field }) => (
-                <FormItem className='flex-1 w-full'>
+                <FormItem className='flex-1 relative w-full'>
                   <FormLabel className='text-zinc-600'>Last name</FormLabel>
                   <FormControl>
                     <Input
@@ -268,7 +269,7 @@ const RegisterForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className='absolute top-0 translate-y-[66px] left-0' />
                 </FormItem>
               )}
             />
@@ -278,7 +279,7 @@ const RegisterForm = () => {
             control={form.control}
             name='email'
             render={({ field }) => (
-              <FormItem>
+              <FormItem className='relative '>
                 <FormLabel className='text-zinc-600'>Email</FormLabel>
                 <FormControl>
                   <Input
@@ -288,16 +289,16 @@ const RegisterForm = () => {
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className='absolute top-0 translate-y-[66px] left-0' />
               </FormItem>
             )}
           />
-          <div className='flex flex-col sm:flex-row items-center gap-4'>
+          <div className='flex flex-col sm:flex-row items-center gap-4 gap-y-6'>
             <FormField
               control={form.control}
               name='password'
               render={({ field }) => (
-                <FormItem className='flex-1 w-full'>
+                <FormItem className='relative flex-1 w-full'>
                   <FormLabel className='text-zinc-600'>Password</FormLabel>
                   <FormControl>
                     <Input
@@ -308,7 +309,7 @@ const RegisterForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className='absolute top-0 translate-y-[66px] left-0' />
                 </FormItem>
               )}
             />
@@ -316,7 +317,7 @@ const RegisterForm = () => {
               control={form.control}
               name='confirm_password'
               render={({ field }) => (
-                <FormItem className='flex-1 w-full'>
+                <FormItem className='relative flex-1 w-full'>
                   <FormLabel className='text-zinc-600'>
                     Confirm password
                   </FormLabel>
@@ -329,7 +330,7 @@ const RegisterForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className='absolute top-0 translate-y-[66px] left-0' />
                 </FormItem>
               )}
             />
@@ -339,7 +340,7 @@ const RegisterForm = () => {
             control={form.control}
             name='privacy'
             render={({ field }) => (
-              <FormItem className='flex pt-2 gap-2'>
+              <FormItem className='relative flex pt-2 gap-2'>
                 <FormControl>
                   <Checkbox
                     checked={field.value}
@@ -357,7 +358,7 @@ const RegisterForm = () => {
                   </Link>
                   .
                 </FormLabel>
-                <FormMessage />
+                <FormMessage className='absolute top-0 translate-y-[66px] left-0' />
               </FormItem>
             )}
           />
