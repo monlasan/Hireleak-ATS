@@ -65,7 +65,7 @@
   }
 }
 
-.noise-bg::before {
+.noise-bg {
   content: '';
   position: absolute;
   inset: 0;
@@ -74,6 +74,7 @@
   background-size: 5%;
 }
 .my-radial-bg {
+  position: absolute;
   /* global 92%+ browsers support */
   /* background: radial-gradient(
     circle at 53% 100%,

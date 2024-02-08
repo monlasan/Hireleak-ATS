@@ -25,7 +25,7 @@ const DashboardHeader = () => {
             <div className='hidden md:flex items-center gap-3'>
               <div className='w-[1px] h-8 bg-zinc-100 opacity-20 rotate-12'></div>
               <div className='rounded-full w-8 h-8 bg-gradient-to-tr from-primary to-secondary'></div>
-              <span className='text-sm text-zinc-100'>Vercel</span>
+              <span className='text-sm text-zinc-100'>OpenSI</span>
             </div>
             <nav className='hidden md:block'>
               <ul className='text-zinc-400 flex items-center'>
@@ -67,7 +67,7 @@ const DashboardHeader = () => {
               </Avatar>
               <div className='leading-tight'>
                 <b>Khaled Sanny</b> <br />
-                <span className='text-sm opacity-60'>Vercel</span>
+                <span className='text-sm opacity-60'>OpenSI</span>
               </div>
             </div>
             <DropdownMenu>
@@ -84,7 +84,7 @@ const DashboardHeader = () => {
                     </div>
                     <div className='text-sm flex flex-col font-semibold'>
                       Antonio Santorini
-                      <span className='text-sm font-normal'>Vercel</span>
+                      <span className='text-sm font-normal'>OpenSI</span>
                     </div>
                   </div>
                 </DropdownMenuLabel>

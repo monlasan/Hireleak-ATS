@@ -54,31 +54,30 @@ export default function Home() {
                   />
                 </Button>
               </Link>
-              {/* <Button className='bg-white hover:bg-zinc-100 text-zinc-800'>
-                See example
-              </Button> */}
             </div>
           </div>
         </MaxWidthWrapper>
       </header>
       <main className='overflow-x-hidden r bg-white'>
         {/* <section className='flex h-screen gap-6 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-violet-700 via-blue-500 to-white bg'> */}
-        <section className='flex isolate h-screen relative gap-6 my-radial-bg -mx-48'>
+        <section className='flex isolate h-screen relative gap-6'>
+          <div className='my-radial-bg -mx-48 inset-0'></div>
           <div className='noise-bg '></div>
           <MaxWidthWrapper className={cn('flex justify-center z-10 w-full')}>
-            <div className='max-w-3xl pb-12 flex flex-col text-center justify-center text-white gap-6'>
-              <h1 className='text-6xl font-bold '>
+            {/* <MaxWidthWrapper className=''> */}
+            <div className='max-w-3xl gap-4 pt-8 sm:pt-0 sm:pb-16 sm:gap-6 flex flex-col text-center justify-center text-white'>
+              <h1 className='text-4xl md:text-6xl font-bold '>
                 Automate your recruitment process.
               </h1>
-              <p className='text-xl font-semibold'>
+              <p className='text-lg md:text-xl font-semibold'>
                 Take data-driven hiring decisions by creating recruitment
                 campaigns and leveraging AI to streamline resume processing.
               </p>
-              <div className='flex justify-center items-center gap-4'>
-                <Link href='/sign-up'>
+              <div className='flex mx-auto flex-col sm:flex-row justify-center items-center gap-4 gap-y-2'>
+                <Link className=' w-full' href='/sign-up'>
                   <Button
                     size='lg'
-                    className='bg-zinc-800 hover:bg-zinc-900 text-white group'
+                    className='bg-zinc-800 w-full hover:bg-zinc-900 text-white group'
                   >
                     Get started{' '}
                     <ArrowRight
@@ -87,10 +86,10 @@ export default function Home() {
                     />
                   </Button>
                 </Link>
-                <Link href='/sign-in'>
+                <Link className=' w-full' href='/sign-in'>
                   <Button
                     size='lg'
-                    className='bg-white hover:bg-zinc-100 text-zinc-800'
+                    className='bg-white w-full hover:bg-zinc-100 text-zinc-800'
                   >
                     Sign In
                   </Button>
@@ -105,7 +104,7 @@ export default function Home() {
             <img
               src='/landing-hero-image.jpeg'
               alt='Software dashboard'
-              className='border rounded relative -mt-36 '
+              className='border rounded relative -mt-16 sm:-mt-36 '
             />
           </MaxWidthWrapper>
         </section>
