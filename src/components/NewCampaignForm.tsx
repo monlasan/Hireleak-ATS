@@ -260,7 +260,7 @@ const NewCampaignForm = () => {
           <div>
             <span
               className={cn(
-                'text-sm font-medium inline-block mb-2',
+                'text-xs font-medium inline-block mb-2',
                 notJobDescription && 'text-destructive'
               )}
             >

@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { ScrollArea } from './ui/scroll-area';
 
 const CampaignGeneralInformations = () => {
   return (
@@ -64,23 +65,32 @@ const CampaignGeneralInformations = () => {
               <DialogTitle>Job description</DialogTitle>
               <DialogDescription>Senior software engineer</DialogDescription>
             </DialogHeader>
-            <Card className='p-4 text-sm font-normal flex flex-col gap-3'>
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni
-                eius doloribus molestiae voluptas exercitationem quibusdam quo,
-                similique dolore dolor ex? Molestiae dolor ad nisi molestias
-                exercitationem! Quas odio porro expedita. Lorem ipsum dolor, sit
-                amet consectetur adipisicing elit.
-              </p>
-              <p>
-                Magni eius doloribus molestiae voluptas exercitationem quibusdam
-                quo, similique dolore dolor ex? Molestiae dolor ad nisi
-                molestias exercitationem! Quas odio porro expedita. Lorem ipsum
-                dolor, sit amet consectetur adipisicing elit. Magni eius
-                doloribus molestiae voluptas exercitationem quibusdam quo,
-                similique dolore dolor ex? Molestiae dolor ad nisi molestias
-                exercitationem! Quas odio porro expedita.
-              </p>
+            <Card className='text-sm font-normal flex flex-col gap-3'>
+              <ScrollArea className='h-[300px] p-4'>
+                Jokester began sneaking into the castle in the middle of the
+                night and leaving jokes all over the place: under the king's
+                pillow, in his soup, even in the royal toilet. The king was
+                furious, but he couldn't seem to stop Jokester. And then, one
+                day, the people of the kingdom discovered that the jokes left by
+                Jokester were so funny that they couldn't help but laugh. And
+                once they started laughing, they couldn't stop.
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Magni eius doloribus molestiae voluptas exercitationem
+                  quibusdam quo, similique dolore dolor ex? Molestiae dolor ad
+                  nisi molestias exercitationem! Quas odio porro expedita. Lorem
+                  ipsum dolor, sit amet consectetur adipisicing elit.
+                </p>
+                <p>
+                  Magni eius doloribus molestiae voluptas exercitationem
+                  quibusdam quo, similique dolore dolor ex? Molestiae dolor ad
+                  nisi molestias exercitationem! Quas odio porro expedita. Lorem
+                  ipsum dolor, sit amet consectetur adipisicing elit. Magni eius
+                  doloribus molestiae voluptas exercitationem quibusdam quo,
+                  similique dolore dolor ex? Molestiae dolor ad nisi molestias
+                  exercitationem! Quas odio porro expedita.
+                </p>
+              </ScrollArea>
             </Card>
           </DialogContent>
         </Dialog>

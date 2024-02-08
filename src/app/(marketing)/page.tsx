@@ -100,12 +100,12 @@ export default function Home() {
             {/* <div></div> */}
           </MaxWidthWrapper>
         </section>
-        <section className='pb-10 z-20'>
+        <section className='pb-10 '>
           <MaxWidthWrapper>
             <img
               src='/landing-hero-image.jpeg'
               alt='Software dashboard'
-              className='border rounded relative z-10 -mt-36 '
+              className='border rounded relative -mt-36 '
             />
           </MaxWidthWrapper>
         </section>
