@@ -15,7 +15,7 @@ export default function AuthLayout({
           </div>
         </MaxWidthWrapper>
       </header>
-      <main>{children}</main>
+      <main className='bg-zinc-50'>{children}</main>
       <footer className='h-96 bg-primary'></footer>
     </>
   );

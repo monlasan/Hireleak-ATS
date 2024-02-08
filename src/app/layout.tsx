@@ -5,6 +5,10 @@ import Link from 'next/link';
 import { Toaster } from '@/components/ui/sonner';
 import Providers from '@/components/Providers';
 
+/**
+ * TODO: Maybe i can add iframe functionality to allow companies to host their campaign application portal page.
+ */
+
 const quicksand = Quicksand({
   weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
@@ -33,6 +37,10 @@ export default function RootLayout({
           <Link href='/dashboard'>Dashboard</Link>
           <Link href='/sign-in'>SignIn</Link>
           <Link href='/sign-up'>SignUp</Link>
+          <Link href='/514'>NOT FOUND</Link>
+          <Link href='/apply/mainfo/senior-backend-react-developer'>
+            PORTAL
+          </Link>
         </div>
         <Providers>
           {children}
