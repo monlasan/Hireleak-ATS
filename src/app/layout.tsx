@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning className='relative'>
       <body className={`${poppins.className} antialiased`}>
-        <div className='flex text-xs items-center gap-4 z-50 fixed bottom-0 left-0 right-0 bg-zinc-50/10'>
+        <div className='flex text-xs overflow-hidden items-center gap-4 z-50 fixed bottom-0 left-0 right-0 bg-zinc-50/10'>
           <Link href='/'>Home</Link>
           <Link href='/dashboard'>Dashboard</Link>
           <Link href='/sign-in'>SignIn</Link>

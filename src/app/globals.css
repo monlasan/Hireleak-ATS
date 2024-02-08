@@ -125,3 +125,6 @@
   outline: none;
   min-height: 100px;
 }
+.language-htmlbars {
+  white-space: break-spaces !important;
+}

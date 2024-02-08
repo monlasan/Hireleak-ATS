@@ -15,40 +15,52 @@ import { ScrollArea } from './ui/scroll-area';
 
 const CampaignGeneralInformations = () => {
   return (
-    <Card className='pb-5 flex-1 md:max-w-80 divide-y flex flex-col'>
+    <Card className='pb-5 flex-1 w-full divide-y flex flex-col'>
       <h3 className='font-medium text-lg text-foreground p-4'>
         General informations
       </h3>
       <div className='py-3 px-4 flex flex-col gap-2'>
         <div className='flex items-center justify-between '>
-          <span className='opacity-50 text-sm'>Status:</span>
+          <span className='opacity-50 whitespace-nowrap text-sm'>Status:</span>
           <Badge>Running</Badge>
         </div>
-        <div className='flex items-center justify-between '>
-          <span className='opacity-50 text-sm'>Created at:</span>
-          <span className='font-normal text-sm opacity-70 text-right'>
+        <div className='flex items-center gap-8 justify-between '>
+          <span className='opacity-50 whitespace-nowrap text-sm'>
+            Created at:
+          </span>
+          <span className='font-normal text-sm opacity-70 text-right whitespace-nowrap'>
             Tuesday, 13th Apr 20PM
           </span>
         </div>
       </div>
       <div className='py-3 px-4'>
-        <div className='flex items-center justify-between'>
-          <span className='opacity-50 text-sm'>Start date:</span>
-          <span className='font-normal text-right'>Tuesday, 13th Apr 20PM</span>
+        <div className='flex items-center gap-8 justify-between'>
+          <span className='opacity-50 whitespace-nowrap text-sm'>
+            Start date:
+          </span>
+          <span className='font-normal text-right whitespace-nowrap'>
+            Tuesday, 13th Apr 20PM
+          </span>
         </div>
-        <div className='flex items-center justify-between'>
-          <span className='opacity-50 text-sm'>End date:</span>
-          <span className='font-normal text-right'>Friday, 21th Apr 20PM</span>
+        <div className='flex items-center gap-8 justify-between'>
+          <span className='opacity-50 whitespace-nowrap text-sm'>
+            End date:
+          </span>
+          <span className='font-normal text-right whitespace-nowrap'>
+            Friday, 21th Apr 20PM
+          </span>
         </div>
       </div>
-      <div className='flex items-center justify-between py-3 px-4'>
-        <span className='opacity-50 text-sm'>Limit:</span>
+      <div className='flex items-center gap-8 justify-between py-3 px-4'>
+        <span className='opacity-50 whitespace-nowrap text-sm'>Limit:</span>
         <Badge variant='secondary' className='text-base'>
           42
         </Badge>
       </div>
-      <div className='flex items-center justify-between py-3 px-4'>
-        <span className='opacity-50 text-sm'>Acceptance:</span>
+      <div className='flex items-center gap-8 justify-between py-3 px-4'>
+        <span className='opacity-50 whitespace-nowrap text-sm'>
+          Acceptance:
+        </span>
         <Badge variant='secondary' className='text-base'>
           85%
         </Badge>

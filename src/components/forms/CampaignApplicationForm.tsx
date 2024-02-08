@@ -191,7 +191,7 @@ const CampaignApplicationForm = () => {
     //   cover_letter = editorText;
     // }
     toast.success(
-      'You have successfully submitted your application. We will get back to you shortly'
+      'You have successfully submitted your application. We will get back to you shortly.'
     );
     // } catch (err: String | any) {
     //   toast.error(err);
