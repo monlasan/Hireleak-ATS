@@ -45,7 +45,7 @@ const formSchema = z.object({
     .number()
     .lte(500, 'You cannot exceed 500 applicants.')
     .gte(1, 'Please enter a limit of applicants.'),
-  acceptance_percentage: z
+  acceptance_percentage: z.coerce
     .number()
     .lte(100, 'Tou cannot exceed 100%.')
     .gte(1, 'Please enter an acceptance percentage for the campaign.'),
