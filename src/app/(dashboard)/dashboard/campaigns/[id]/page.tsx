@@ -7,31 +7,14 @@ import { DataTable } from '@/components/data-table';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Copy, Download, Link as LinkIcon } from 'lucide-react';
-import {
-  columns as ApplicantsColumnDef,
-  Payment,
-} from '@/components/DatatableApplicantsColumnDef';
+
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import CampaignPortalClipboard from '@/components/CampaignPortalClipboard';
 import CopyClipboardButton from '@/components/CopyClipboardButton';
-
-async function getData(): Promise<Payment[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: '728ed52f',
-      amount: 100,
-      status: 'pending',
-      email: 'm@example.com',
-    },
-    // ...
-  ];
-}
+import DatatableCampaignApplicants from '@/components/datatables/DatatableCampaignApplicants';
 
 const Campaign = async () => {
-  const applicants = await getData();
-
   const campaign_url =
     'https://embauch.io/apply/opensi/senior-frontend-software-engineer/';
   /**
@@ -98,7 +81,6 @@ const Campaign = async () => {
           <CampaignGeneralInformations />
         </div>
         <Card className='p-4'>
-          {/* <CardHeader> */}
           <div className='flex mb-4 flex-wrap items-center justify-between gap-3'>
             <h3 className='font-medium text-lg text-foreground'>
               Applicants (20)
@@ -108,10 +90,7 @@ const Campaign = async () => {
               Export to CSV
             </Button>
           </div>
-          {/* </CardHeader> */}
-          {/* <CardContent> */}
-          <DataTable columns={ApplicantsColumnDef} data={applicants} />
-          {/* </CardContent> */}
+          <DatatableCampaignApplicants />
         </Card>
       </div>
     </MaxWidthWrapper>

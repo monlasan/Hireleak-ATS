@@ -33,6 +33,7 @@ import Link from 'next/link';
 import { Badge } from '../ui/badge';
 import { Card } from '../ui/card';
 import TiptapEditor from '../TipTapEditor';
+import { APP_NAME } from '@/lib/constants';
 
 const formSchema = z.object({
   first_name: z.string().min(1, 'Enter a your first name.').max(20),
@@ -353,6 +354,9 @@ const CampaignApplicationForm = () => {
           />
 
           <div className='flex items-center justify-center gap-1 pt-3 flex-col'>
+            <span className='text-xs text-left w-full text-zinc-600 font-medium inline-block mb-1'>
+              Resume
+            </span>
             <Input
               type='file'
               onChange={handlePickedFile}
@@ -428,7 +432,7 @@ const CampaignApplicationForm = () => {
                 target='_blank'
                 className='text-primary underline'
               >
-                app_name
+                {APP_NAME}
               </Link>
             </span>
           </div>

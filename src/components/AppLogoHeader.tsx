@@ -1,19 +1,47 @@
+import { APP_NAME } from '@/lib/constants';
+import Image from 'next/image';
 import Link from 'next/link';
 type Props = {
   hideLabel?: boolean;
-  url: string;
+  url?: string;
+  color?: string;
 };
-const AppLogoHeader = ({ hideLabel, url }: Props) => {
+const AppLogoHeader = ({ hideLabel, url = '/', color = 'CB' }: Props) => {
+  let img = '';
+  switch (color) {
+    case 'B':
+      img = 'Hireleak-B.png';
+      break;
+    case 'W':
+      img = 'Hireleak-W.png';
+      break;
+    case 'CC':
+      img = 'Hireleak-CC.png';
+      break;
+    case 'CB':
+      img = 'Hireleak-CB.png';
+      break;
+    case 'WB':
+      img = 'Hireleak-WB.png';
+      break;
+    case 'BW':
+      img = 'Hireleak-BW.png';
+      break;
+    default:
+      img = 'Hireleak-CB.png';
+      break;
+  }
   return (
     <Link href={url} className='flex items-center gap-2'>
-      <div className='h-8 w-8 bg-primary justify-center rounded items-center flex text-white font-black'>
-        <span className='-rotate-12 text-xl'>em</span>
-      </div>
-      {!hideLabel && (
-        <span className='text-xs font-medium text-white hidden md:inline'>
-          embauch
-        </span>
-      )}
+      <Image src={'/' + img} alt={APP_NAME + ' logo'} width={120} height={32} />
+      {/* {hideLabel ? (
+      ): (
+        <Image src={'/' + img} alt={APP_NAME + ' logo'} width={120} height={32} />
+
+      )} */}
+      {/* <span className='text-xs font-medium text-white hidden md:inline'> */}
+      {/* embauch */}
+      {/* </span> */}
     </Link>
   );
 };

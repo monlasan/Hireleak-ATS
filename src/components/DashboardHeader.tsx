@@ -11,22 +11,19 @@ import {
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
 import { Button, buttonVariants } from './ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Bell, Globe, Menu, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import UserInfosDropdown from './UserInfosDropdown';
+import OrganizationHeaderWidget from './OrganizationHeaderWidget';
 
-const DashboardHeader = () => {
+const DashboardHeader = async () => {
   return (
     <header className='border-b border-zinc-700/60 bg-zinc-800'>
       <MaxWidthWrapper>
         <div className='py-3 flex items-center justify-between'>
           <div className='flex items-center justify-center gap-6'>
-            <AppLogoHeader url='/dashboard' />
-            <div className='hidden md:flex items-center gap-3'>
-              <div className='w-[1px] h-8 bg-zinc-100 opacity-20 rotate-12'></div>
-              <div className='rounded-full w-8 h-8 bg-gradient-to-tr from-primary to-secondary'></div>
-              <span className='text-sm text-zinc-100'>OpenSI</span>
-            </div>
+            <AppLogoHeader url='/dashboard' color='W' />
+            <OrganizationHeaderWidget />
             <nav className='hidden md:block'>
               <ul className='text-zinc-400 flex items-center'>
                 <li>
@@ -57,19 +54,7 @@ const DashboardHeader = () => {
               <span className='absolute top-2 right-2 animate-ping h-2.5 w-2.5 rounded-full bg-primary'></span>
               <span className='sr-only'>Notifications Icon</span>
             </Button>
-            <div className='hidden md:flex items-center gap-2 ml-2'>
-              <Avatar>
-                <AvatarImage
-                  src='https://github.com/shadcn.png'
-                  alt='@shadcn'
-                />
-                <AvatarFallback className='text-zinc-800'>CN</AvatarFallback>
-              </Avatar>
-              <div className='leading-tight'>
-                <b>Khaled Sanny</b> <br />
-                <span className='text-sm opacity-60'>OpenSI</span>
-              </div>
-            </div>
+            <UserInfosDropdown />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button className='ml-2 md:hidden' variant='ghost' size='icon'>

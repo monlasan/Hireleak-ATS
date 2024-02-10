@@ -17,6 +17,8 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Loader } from 'lucide-react';
+import { signInWithEmailAndPassword } from '@/lib/actions/auth-server.actions';
+import { useUser } from '@/store/user.store';
 
 const formSchema = z.object({
   email: z.string().email('Please enter a valid email'),
@@ -26,7 +28,8 @@ const formSchema = z.object({
 });
 
 const LoginForm = () => {
-  const [loading, isLoading] = React.useState(false);
+  const { setUser } = useUser();
+  const [isPending, startTransition] = React.useTransition();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -36,23 +39,16 @@ const LoginForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // dispatch(signInStart());
-    // try {
-    //   const res: {
-    //     user: any;
-    //     accessToken: string;
-    //     refreshToken: string;
-    //   } = await authService.login({
-    //     emailOrPhone: values.email,
-    //     password: values.password,
-    //   });
-    //   dispatch(signInSuccess(res));
-    //   LocalStorage.set('token', res.accessToken);
-    //   navigate('/');
-    // } catch (err: String | any) {
-    //   toast.error(err);
-    //   dispatch(signInFailure(err));
-    // }
+    startTransition(async () => {
+      const { email, password } = values;
+      const result = await signInWithEmailAndPassword({ email, password });
+      const { data, error } = JSON.parse(result);
+      setUser(data.user);
+      if (error?.message) {
+        toast.error(error?.message);
+        console.error(error);
+      }
+    });
   }
 
   return (
@@ -77,7 +73,7 @@ const LoginForm = () => {
                 <FormControl>
                   <Input
                     className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500 '
-                    disabled={loading}
+                    disabled={isPending}
                     placeholder='Enter your email address'
                     {...field}
                   />
@@ -95,7 +91,7 @@ const LoginForm = () => {
                 <FormControl>
                   <Input
                     className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500'
-                    disabled={loading}
+                    disabled={isPending}
                     placeholder='Enter your password'
                     type='password'
                     {...field}
@@ -106,8 +102,8 @@ const LoginForm = () => {
             )}
           />
           <div className='pt-4'>
-            <Button disabled={loading} className=' w-full' type='submit'>
-              {loading && <Loader className='mr-2 animate-spin' />}
+            <Button disabled={isPending} className=' w-full' type='submit'>
+              {isPending && <Loader className='mr-2 animate-spin' />}
               Sign In
             </Button>
           </div>

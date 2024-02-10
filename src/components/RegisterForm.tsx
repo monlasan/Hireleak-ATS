@@ -20,8 +20,11 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Loader } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { APP_NAME } from '@/lib/constants';
+import { signUpWithEmailAndPassword } from '@/lib/actions/auth-server.actions';
+import { createOrganization } from '@/lib/actions/organization.actions';
+import { useUser } from '@/store/user.store';
 
 const formSchema = z
   .object({
@@ -41,8 +44,8 @@ const formSchema = z
   });
 
 const RegisterForm = () => {
-  const router = useRouter();
-  const [loading, setIsLoading] = React.useState(false);
+  const { setUser } = useUser();
+  const [isPending, startTransition] = React.useTransition();
   const [isOver, setIsOver] = React.useState(false);
   const [file, setFile] = React.useState<File>({} as File);
   const [orgLogo, setOrgLogo] = React.useState<string | ArrayBuffer | null>(
@@ -141,23 +144,38 @@ const RegisterForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsLoading(true);
-    // dispatch(signInStart());
-    // try {
-    //   const res: {
-    //     user: any;
-    //     accessToken: string;
-    //     refreshToken: string;
-    //   } = await authService.login({
-    //     emailOrPhone: values.email,
-    //     password: values.password,
-    //   });
-    //   dispatch(signInSuccess(res));
-    //   LocalStorage.set('token', res.accessToken);
-    router.push('/sign-in');
-    toast.success(
-      'A confirmation email has been sent to specified email address. Please verify your email.'
-    );
+    startTransition(async () => {
+      // todo: Add logic to upload image to ImbBB
+      const res_organization = await createOrganization(values.org_name, '');
+      const { data: data_org, error: error_org } = JSON.parse(res_organization);
+      if (error_org?.message) {
+        toast.error(
+          'Something went wrong while registering. Please try again.'
+        );
+      }
+      const result = await signUpWithEmailAndPassword({
+        email: values.email,
+        password: values.password,
+        confirm: values.confirm_password,
+        metadata: {
+          organization: data_org[0],
+          first_name: values.first_name,
+          last_name: values.last_name,
+        },
+      });
+      const { data, error } = JSON.parse(result);
+      setUser(data.user);
+      if (error?.message) {
+        toast.error(error?.message);
+        console.error(error);
+      } else {
+        toast.success('You are successfully registered.');
+      }
+    });
+    // router.push('/sign-in');
+    // toast.success(
+    //   'A confirmation email has been sent to specified email address. Please verify your email.'
+    // );
     // } catch (err: String | any) {
     //   toast.error(err);
     //   dispatch(signInFailure(err));
@@ -190,7 +208,7 @@ const RegisterForm = () => {
                 className={cn(
                   'w-[110px] h-[110px] bg-white/50 flex justify-center cursor-pointer hover:scale-105 transition-transform items-center border border-dashed overflow-hidden rounded-full',
                   isOver && 'opacity-70 scale-105',
-                  loading && 'select-none opacity-70 pointer-events-none'
+                  isPending && 'select-none opacity-70 pointer-events-none'
                 )}
                 onClick={handleClick}
                 onDragOver={handleDragOver}
@@ -226,7 +244,7 @@ const RegisterForm = () => {
                   <FormControl>
                     <Input
                       className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500 '
-                      disabled={loading}
+                      disabled={isPending}
                       placeholder='Enter your organization name'
                       {...field}
                     />
@@ -246,7 +264,7 @@ const RegisterForm = () => {
                   <FormControl>
                     <Input
                       className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500 '
-                      disabled={loading}
+                      disabled={isPending}
                       placeholder='Enter your first name'
                       {...field}
                     />
@@ -264,7 +282,7 @@ const RegisterForm = () => {
                   <FormControl>
                     <Input
                       className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500 '
-                      disabled={loading}
+                      disabled={isPending}
                       placeholder='Enter your last name'
                       {...field}
                     />
@@ -284,7 +302,7 @@ const RegisterForm = () => {
                 <FormControl>
                   <Input
                     className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500 '
-                    disabled={loading}
+                    disabled={isPending}
                     placeholder='Enter your email address'
                     {...field}
                   />
@@ -303,7 +321,7 @@ const RegisterForm = () => {
                   <FormControl>
                     <Input
                       className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500'
-                      disabled={loading}
+                      disabled={isPending}
                       placeholder='Enter your password'
                       type='password'
                       {...field}
@@ -324,7 +342,7 @@ const RegisterForm = () => {
                   <FormControl>
                     <Input
                       className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500'
-                      disabled={loading}
+                      disabled={isPending}
                       placeholder='Confirm password'
                       type='password'
                       {...field}
@@ -348,7 +366,7 @@ const RegisterForm = () => {
                   />
                 </FormControl>
                 <FormLabel className='space-x-0 text-zinc-600 relative bottom-1'>
-                  I accept {'<APP>'}{' '}
+                  I accept {APP_NAME}{' '}
                   <Link className='text-primary underline' href='/terms'>
                     Terms and Conditions
                   </Link>{' '}
@@ -364,11 +382,11 @@ const RegisterForm = () => {
           />
           <div className='pt-4'>
             <Button
-              disabled={loading || !form.getValues('privacy')}
+              disabled={isPending || !form.getValues('privacy')}
               className=' w-full'
               type='submit'
             >
-              {loading && <Loader className='mr-2 animate-spin' />}
+              {isPending && <Loader className='mr-2 animate-spin' />}
               Sign Up
             </Button>
           </div>

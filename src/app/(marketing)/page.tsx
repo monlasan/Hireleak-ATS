@@ -21,12 +21,12 @@ export default function Home() {
     <>
       <header className='h-20 fixed inset-x-0 top-0 z-30 w-full'>
         <HeaderBackground />
-        <MaxWidthWrapper className='h-full max-w-5xl'>
+        <MaxWidthWrapper className='h-full max-w-6xl'>
           <div className='flex flex-1 h-full items-center justify-between'>
-            <div className='flex items-center gap-6'>
+            <div className='flex items-center gap-16'>
               <AppLogoHeader url='/' hideLabel={true} />
               <nav>
-                <ul className='flex items-center gap-4'>
+                <ul className='flex items-center gap-6'>
                   <li>
                     <Link href='/'>About</Link>
                   </li>
