@@ -30,6 +30,8 @@ const TiptapEditor = ({ isSubmitting, editorText, setEditorText }: Props) => {
         <div className='border rounded animate-pulse'>
           <div className='flex flex-wrap h-[49px] border-b bg-background text-foreground'></div>
           <div className='h-[120px] outline-none bg-background'></div>
+          {/* <div className='h-[120px] hover:h-[420px] outline-none bg-background'></div> */}
+          {/* <div className='h-[120px] hover:h-[420px] transition-[height_0.4s] outline-none bg-background'></div> */}
         </div>
       )}
     </>

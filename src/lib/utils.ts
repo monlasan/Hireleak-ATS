@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import createSupabaseBrowserClient from './supabase/client';
+import { createClient } from './supabase/client';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -29,7 +29,7 @@ export async function uploadImg(formData: FormData) {
   const bucket = formData.get('bucket');
   const file = formData.get('file') as File;
   if (!bucket || !file) return;
-  const supabase = await createSupabaseBrowserClient();
+  const supabase = createClient();
 
   const filename =
     'public/' + generateRandomStringWithDate() + '---' + file.name;
@@ -46,4 +46,12 @@ export async function uploadImg(formData: FormData) {
       .upload(filename.trim(), file);
     return JSON.stringify(result);
   }
+}
+
+export function formatDate(date: Date) {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 }

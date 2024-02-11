@@ -1,6 +1,7 @@
 import AppLogoHeader from '@/components/AppLogoHeader';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import { readUserSession } from '@/lib/actions';
+import { createClient } from '@/lib/supabase/server';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export default async function AuthLayout({
@@ -8,11 +9,13 @@ export default async function AuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { data } = await readUserSession();
-
-  if (data.session) {
-    return redirect('/dashboard');
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const { data, error } = await supabase.auth.getUser();
+  if (!error && data.user) {
+    redirect('/dashboard');
   }
+
   return (
     <>
       <header className='border-b border-zinc-700/60 bg-zinc-800'>

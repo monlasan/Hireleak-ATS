@@ -4,6 +4,7 @@ import './globals.css';
 import Link from 'next/link';
 import { Toaster } from '@/components/ui/sonner';
 import Providers from '@/components/Providers';
+import { APP_NAME } from '@/lib/constants';
 
 /**
  * TODO: Maybe i can add iframe functionality to allow companies to host their campaign application portal page.
@@ -20,7 +21,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Emboche',
+  title: APP_NAME,
   description: 'Leverage AI to automate your recruitment process.',
 };
 

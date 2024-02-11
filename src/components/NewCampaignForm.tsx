@@ -29,6 +29,9 @@ import { toast } from 'sonner';
 import TiptapEditor from './TipTapEditor';
 import { Card } from './ui/card';
 import { ScrollArea } from './ui/scroll-area';
+import { createCampaign } from '@/lib/actions/campaign.actions';
+import { useUser } from '@/store/user.store';
+import { useRouter } from 'next/navigation';
 
 /**
  * TODO: For the date inputs, add logic to make sure that the end date is always after the start date.
@@ -53,6 +56,8 @@ const formSchema = z.object({
 });
 
 const NewCampaignForm = () => {
+  const router = useRouter();
+  const { user } = useUser();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [notJobDescription, setNoJobDescription] = React.useState(false);
   const [editorText, setEditorText] = React.useState('');
@@ -83,16 +88,28 @@ const NewCampaignForm = () => {
     }
     setNoJobDescription((v) => (v = false));
     setIsSubmitting(true);
-    console.log('VALUES', values);
-    return;
-    try {
-      toast.success('Article created successfully');
-      form.reset();
-      setIsSubmitting(false);
-    } catch (err: String | any) {
-      toast.error(err);
-      setIsSubmitting(false);
+    const result = await createCampaign({
+      name: values.name,
+      applicants_limit: values.limit,
+      end_date: values.end_date,
+      starting_date: values.start_date,
+      status: 'PENDING',
+      acceptance_percentage: values.acceptance_percentage,
+      job_description: editorText,
+      show_job_description: isChecked,
+      organization_id: user?.user_metadata
+        ? user?.user_metadata.organization.id
+        : 0,
+    });
+    const { data, error } = JSON.parse(result);
+    if (error?.message) {
+      toast.error('Something went wrong. Please try again.');
+      return;
     }
+    setIsSubmitting(false);
+    toast.success('Camapaign created successfully');
+    // router.push('/dashboard/campaigns/' + data[0].id);
+    console.log('✅CAMPAIGN CREATED', data);
   }
 
   return (

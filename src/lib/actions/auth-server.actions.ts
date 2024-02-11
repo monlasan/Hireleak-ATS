@@ -1,6 +1,7 @@
 'use server';
 
-import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { createClient } from '@/lib/supabase/server';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export async function signUpWithEmailAndPassword(data: {
@@ -13,7 +14,8 @@ export async function signUpWithEmailAndPassword(data: {
     last_name: string;
   };
 }) {
-  const supabase = await createSupabaseServerClient();
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
   const result = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
@@ -32,19 +34,22 @@ export async function signInWithEmailAndPassword(data: {
   email: string;
   password: string;
 }) {
-  const supabase = await createSupabaseServerClient();
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
   const result = await supabase.auth.signInWithPassword(data);
   return JSON.stringify(result);
 }
 
 export async function logout() {
-  const supabase = await createSupabaseServerClient();
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
   await supabase.auth.signOut();
   redirect('/sign-in');
 }
 
 // export async function loginWithGithub() {
-// 	const supabase = await createSupabaseServerClient();
+// const cookieStore = cookies();
+// 	const supabase = createClient(cookieStore);
 
 // 	supabase.auth.signInWithOAuth({
 // 		provider: "github",

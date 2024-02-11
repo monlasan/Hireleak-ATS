@@ -3,8 +3,6 @@ import React from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { ChevronDown, LogOut } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { createSupabaseServerClient } from '@/lib/supabase/server';
-import { redirect } from 'next/navigation';
 import { Button } from './ui/button';
 import { logout } from '@/lib/actions/auth-server.actions';
 import { useUser } from '@/store/user.store';
@@ -27,8 +25,12 @@ const UserInfosDropdown = () => {
             </AvatarFallback>
           </Avatar>
           <div className='flex flex-col'>
-            <span className='text-sm'>Khaled Sanny</span>
-            <span className='text-xs opacity-40'>khaledsannyaml@gmail.com</span>
+            <span className='text-sm'>
+              {user?.user_metadata.first_name +
+                ' ' +
+                user?.user_metadata.last_name}
+            </span>
+            <span className='text-xs opacity-40'>{user?.email}</span>
           </div>
           <div className=' h-8 flex items-center justify-center'>
             <ChevronDown

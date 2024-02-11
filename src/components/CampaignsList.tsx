@@ -1,22 +1,18 @@
+import { fetchCampaigns } from '@/lib/actions/campaign.actions';
 import CampaignsListItem from './CampaignsListItem';
+import { type Campaign } from '@/lib/types';
 
-const CampaignsList = () => {
-  const campaigns = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-    {
-      id: 3,
-    },
-  ];
+const CampaignsList = async () => {
+  const result = await fetchCampaigns();
+  const { data: campaigns, error } = JSON.parse(result);
+  if (error?.message) {
+    return <div>Something went wrong while fetching the campaigns.</div>;
+  }
 
   return (
-    <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-3'>
-      {campaigns.map((campaign) => (
-        <CampaignsListItem key={campaign.id} />
+    <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-3'>
+      {campaigns.map((campaign: Campaign) => (
+        <CampaignsListItem campaign={campaign} key={campaign.id} />
       ))}
     </div>
   );

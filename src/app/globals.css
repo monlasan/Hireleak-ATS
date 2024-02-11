@@ -123,8 +123,15 @@
 
 .ProseMirror {
   outline: none;
-  min-height: 100px;
+  height: 100px;
+  /* height: 400px; */
+  max-width: 472px;
+  overflow: auto;
+  transition: height 0.4s;
 }
+/* .ProseMirror:hover {
+  height: 400px;
+} */
 .language-htmlbars {
   white-space: break-spaces !important;
 }
