@@ -1,11 +1,20 @@
 import CampaignsList from '@/components/CampaignsList';
 import CampaignsListSearch from '@/components/CampaignsListSearch';
 import CampaignsListStatusFilter from '@/components/CampaignsListStatusFilter';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
+import NewCampaignForm from '@/components/NewCampaignForm';
 
 const Campaigns = () => {
   return (
@@ -16,10 +25,24 @@ const Campaigns = () => {
             <CampaignsListSearch />
             <div className='flex  items-center gap-3'>
               <CampaignsListStatusFilter />
-              <Link className={buttonVariants()} href='/dashboard/new/campaign'>
-                <Plus className='mr-2' />
-                Create campaign
-              </Link>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button>
+                    <Plus className='mr-2' />
+                    Create campaign
+                  </Button>
+                </SheetTrigger>
+                <SheetContent className='w-full sm:max-w-max'>
+                  <SheetHeader className='pb-4'>
+                    <SheetTitle>New campaign</SheetTitle>
+                    {/* <SheetDescription>
+                      Make changes to your profile here. Click save when you're
+                      done.
+                    </SheetDescription> */}
+                  </SheetHeader>
+                  <NewCampaignForm />
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
           <CampaignsList />

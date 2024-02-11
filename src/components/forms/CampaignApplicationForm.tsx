@@ -27,13 +27,14 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
 import { BookOpen, Download, Eye, FileText, Loader } from 'lucide-react';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
+import { cn, uploadImg } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Badge } from '../ui/badge';
 import { Card } from '../ui/card';
 import TiptapEditor from '../TipTapEditor';
 import { APP_NAME } from '@/lib/constants';
+import { enlistApplicant } from '@/lib/actions/applicant.actions';
 
 const formSchema = z.object({
   first_name: z.string().min(1, 'Enter a your first name.').max(20),
@@ -46,11 +47,19 @@ type FileInfos = {
   filesize: number;
 };
 
-const CampaignApplicationForm = () => {
+type Props = {
+  campaignInfos: {
+    organizationSlug: string;
+    campaignId: string;
+    campaignSlug: string;
+  };
+};
+
+const CampaignApplicationForm = ({ campaignInfos }: Props) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [noCoverLetter, setNoJobDescription] = React.useState(false);
-  const [file, setFile] = React.useState<File>({} as File);
+  const [file, setFile] = React.useState<File | null>({} as File);
   const [fileInfos, setFileInfos] = React.useState<FileInfos | null>(null);
   const [noResume, setNoResume] = React.useState(false);
   const [editorText, setEditorText] = React.useState('');
@@ -181,6 +190,55 @@ const CampaignApplicationForm = () => {
     }
     setNoResume((v) => (v = false));
     setIsLoading(true);
+    const formData = new FormData();
+    if (!file) {
+      toast.error('Please upload your resume');
+      return;
+    }
+    formData.set('bucket', 'resumes');
+    formData.set('file', file);
+    const result_upload = await uploadImg(formData);
+    if (!result_upload) {
+      toast.error('Failed to submit application. Please try again.');
+      setIsLoading(false);
+      return;
+    }
+    const { data: uploadedFile, error: errorUpload } =
+      JSON.parse(result_upload);
+    if (errorUpload?.message) {
+      toast.error(errorUpload?.message);
+      setIsLoading(false);
+    } else {
+      // do someting
+      const result = await enlistApplicant({
+        campaign_id: parseInt(campaignInfos.campaignId),
+        email: values.email,
+        first_name: values.first_name,
+        last_name: values.last_name,
+        cover_letter: editorText,
+        resume_url:
+          process.env.NEXT_PUBLIC_SUPABASE_URL +
+          '/storage/v1/object/public/' +
+          uploadedFile.fullPath,
+      });
+      const { data, error } = JSON.parse(result);
+      if (error?.message) {
+        toast.error(error?.message);
+        console.error(error);
+        setIsLoading(false);
+      } else {
+        toast.success(
+          'You have successfully submitted your application. We will get back to you shortly.'
+        );
+        console.log('✅ SUBMITTED APPLICATION', data);
+        setFileInfos(null);
+        setFile(null);
+        setEditorText((v) => (v = ''));
+        form.reset();
+        setIsLoading(false);
+        router.push('/thank-you');
+      }
+    }
     // let cover_letter = '';
     // if (
     //   !editorText ||
@@ -191,9 +249,7 @@ const CampaignApplicationForm = () => {
     // } else {
     //   cover_letter = editorText;
     // }
-    toast.success(
-      'You have successfully submitted your application. We will get back to you shortly.'
-    );
+
     // } catch (err: String | any) {
     //   toast.error(err);
     // }
@@ -237,7 +293,7 @@ const CampaignApplicationForm = () => {
               )}
               <p className='flex items-center justify-center flex-col  text-center text-3xl font-semibold'>
                 <span className='text-primary text-xl font-bold my-3 inline-block'>
-                  OpenSI
+                  OpenSIz
                 </span>{' '}
                 <Dialog>
                   <DialogTrigger asChild>
@@ -259,14 +315,16 @@ const CampaignApplicationForm = () => {
                     </DialogHeader>
                     <Card className='text-sm font-normal flex flex-col gap-3'>
                       <ScrollArea className='h-[300px] p-4'>
-                        Jokester began sneaking into the castle in the middle of
-                        the night and leaving jokes all over the place: under
-                        the king's pillow, in his soup, even in the royal
-                        toilet. The king was furious, but he couldn't seem to
-                        stop Jokester. And then, one day, the people of the
-                        kingdom discovered that the jokes left by Jokester were
-                        so funny that they couldn't help but laugh. And once
-                        they started laughing, they couldn't stop.
+                        {JSON.stringify(campaignInfos)}
+                        =========================== Jokester began sneaking into
+                        the castle in the middle of the night and leaving jokes
+                        all over the place: under the king's pillow, in his
+                        soup, even in the royal toilet. The king was furious,
+                        but he couldn't seem to stop Jokester. And then, one
+                        day, the people of the kingdom discovered that the jokes
+                        left by Jokester were so funny that they couldn't help
+                        but laugh. And once they started laughing, they couldn't
+                        stop.
                         <p>
                           Lorem ipsum dolor, sit amet consectetur adipisicing
                           elit. Magni eius doloribus molestiae voluptas
@@ -395,7 +453,7 @@ const CampaignApplicationForm = () => {
                     )}
                   />
                   <div className='text-zinc-500 text-center text-xs'>
-                    Drag and drop your resume here. Or{' '}
+                    Drxag and drop your resume here. Or{' '}
                     <span className='text-primary'>click to upload</span> <br />
                     (PDF, DOC, DOCX)
                   </div>

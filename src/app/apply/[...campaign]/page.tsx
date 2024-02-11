@@ -8,11 +8,15 @@ type Props = {
   };
 };
 const CampaignPortal = ({ params }: Props) => {
-  const [organizationSlug, campaignSlug] = params.campaign;
+  const [organizationSlug, campaignId, campaignSlug]: string[] =
+    params.campaign;
+
   return (
     <MaxWidthWrapper>
       <div className='py-8 pb-16 flex justify-center gap-4'>
-        <CampaignApplicationForm />
+        <CampaignApplicationForm
+          campaignInfos={{ organizationSlug, campaignId, campaignSlug }}
+        />
       </div>
     </MaxWidthWrapper>
   );

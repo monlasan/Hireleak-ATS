@@ -28,6 +28,7 @@ import { CalendarIcon, FilePlus, Loader } from 'lucide-react';
 import { toast } from 'sonner';
 import TiptapEditor from './TipTapEditor';
 import { Card } from './ui/card';
+import { ScrollArea } from './ui/scroll-area';
 
 /**
  * TODO: For the date inputs, add logic to make sure that the end date is always after the start date.
@@ -95,11 +96,11 @@ const NewCampaignForm = () => {
   }
 
   return (
-    <div className='w-full mx-auto flex flex-col gap-4 max-w-2xl'>
-      <div className='flex flex-wrap items-center gap-3 justify-between'>
-        <h1 className='text-3xl font-semibold'>New campaign</h1>
+    <ScrollArea className='w-full h-full'>
+      {/* <div className='w-full mx-auto flex flex-col gap-4 max-w-2xl'> */}
+      {/* <div className='my-3'>
         <Button
-          className='w-full sm:w-auto'
+          size='sm'
           disabled={isSubmitting}
           onClick={form.handleSubmit(onSubmit)}
         >
@@ -110,8 +111,8 @@ const NewCampaignForm = () => {
           )}
           Create campaign
         </Button>
-      </div>
-      <Card className='p-6'>
+      </div> */}
+      <Card className='p-4 mb-4'>
         <div className='flex flex-col gap-3'>
           <Form {...form}>
             <form className='flex flex-col gap-3'>
@@ -291,7 +292,21 @@ const NewCampaignForm = () => {
           </div>
         </div>
       </Card>
-    </div>
+      <Button
+        // className='w-full sm:w-auto'
+        className='mb-16'
+        size='sm'
+        disabled={isSubmitting}
+        onClick={form.handleSubmit(onSubmit)}
+      >
+        {isSubmitting ? (
+          <Loader size={18} className='animate-spin mr-2' />
+        ) : (
+          <FilePlus size={18} className='mr-2' />
+        )}
+        Create campaign
+      </Button>
+    </ScrollArea>
   );
 };
 

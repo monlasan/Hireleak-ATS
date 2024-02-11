@@ -1,6 +1,49 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import createSupabaseBrowserClient from './supabase/client';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
+}
+
+export function generateRandomStringWithDate(separator = '###') {
+  // Generate a random string
+  const randomString =
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15);
+
+  // Get the current date
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
+  const day = String(currentDate.getDate()).padStart(2, '0');
+
+  // Concatenate the random string and current date with the separator
+  const result =
+    randomString + separator + year + separator + month + separator + day;
+
+  return result;
+}
+
+export async function uploadImg(formData: FormData) {
+  const bucket = formData.get('bucket');
+  const file = formData.get('file') as File;
+  if (!bucket || !file) return;
+  const supabase = await createSupabaseBrowserClient();
+
+  const filename =
+    'public/' + generateRandomStringWithDate() + '---' + file.name;
+
+  if (bucket === 'images') {
+    const result = await supabase.storage
+      .from('images')
+      .upload(filename.trim(), file);
+    return JSON.stringify(result);
+  }
+  if (bucket === 'resumes') {
+    const result = await supabase.storage
+      .from('resumes')
+      .upload(filename.trim(), file);
+    return JSON.stringify(result);
+  }
 }
