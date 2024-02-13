@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { unstable_noStore as noStore, revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { type Campaign } from '../types';
+import { redirect } from 'next/navigation';
 
 export async function fetchCampaigns() {
   const cookieStore = cookies();
@@ -34,7 +35,8 @@ export async function createCampaign(campaign: Campaign) {
   revalidatePath('/dashboard/campaigns');
   return JSON.stringify(result);
 }
-export async function updateCampaign(campaignId: number, campaign: Campaign) {
+
+export async function updateCampaign(campaignId: number, campaign: any) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const result = await supabase

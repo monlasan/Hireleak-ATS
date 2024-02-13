@@ -27,10 +27,11 @@ import Link from 'next/link';
 import CampaignPortalClipboard from '@/components/CampaignPortalClipboard';
 import CopyClipboardButton from '@/components/CopyClipboardButton';
 import DatatableCampaignApplicants from '@/components/datatables/DatatableCampaignApplicants';
-import { getCampaign } from '@/lib/actions/campaign.actions';
+import { getCampaign, updateCampaign } from '@/lib/actions/campaign.actions';
 import { toast } from 'sonner';
 import { type Campaign } from '@/lib/types';
 import EditCampaignForm from '@/components/EditCampaignForm';
+import BtnCancelCampaign from '@/components/BtnCancelCampaign';
 
 const Campaign = async ({ params }: { params: { id: string } }) => {
   const result = await getCampaign(parseInt(params.id));
@@ -52,6 +53,20 @@ const Campaign = async ({ params }: { params: { id: string } }) => {
   frameborder="0" 
   allowfullscreen 
 />`;
+
+  // const cancelCampaign = async () => {
+  //   'use server';
+  //   const result = await updateCampaign(campaign.id!, {
+  //     ...campaign,
+  //     status: 'CANCELLED',
+  //   });
+  //   const { data, error } = JSON.parse(result);
+  //   if (error?.message) {
+  //     toast.error('Something went wrong. Please try again.');
+  //     return;
+  //   }
+  //   toast.success('Campaign updated successfully');
+  // };
 
   return (
     <MaxWidthWrapper>
@@ -75,10 +90,11 @@ const Campaign = async ({ params }: { params: { id: string } }) => {
                 <EditCampaignForm campaign={campaign} />
               </SheetContent>
             </Sheet>
-            <Button size='sm' variant='destructive'>
+            <BtnCancelCampaign campaign={campaign} />
+            {/* <Button onClick={cancelCampaign} size='sm' variant='destructive'>
               <Ban size={18} className='mr-2' />
               Cancel campaign
-            </Button>
+            </Button> */}
           </div>
         </div>
         <div className='flex flex-col lg:flex-row flex-1 gap-4'>

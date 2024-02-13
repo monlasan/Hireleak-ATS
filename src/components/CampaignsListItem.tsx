@@ -8,7 +8,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import Link from 'next/link';
-import { formatDate } from '@/lib/utils';
+import { cn, formatDate, getCampaignStatus } from '@/lib/utils';
 
 type Props = {
   campaign: Campaign;
@@ -31,7 +31,23 @@ const CampaignListItem = ({ campaign }: Props) => {
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            <Badge>{campaign.status}</Badge>
+            <Badge
+              className={cn(
+                getCampaignStatus(
+                  new Date(campaign.starting_date),
+                  new Date(campaign.end_date),
+                  campaign.status === 'CANCELLED'
+                ).class
+              )}
+            >
+              {
+                getCampaignStatus(
+                  new Date(campaign.starting_date),
+                  new Date(campaign.end_date),
+                  campaign.status === 'CANCELLED'
+                ).status
+              }
+            </Badge>
           </div>
           <span className='text-sm opacity-60 text-right'>
             {campaign.created_at && formatDate(campaign.created_at)}

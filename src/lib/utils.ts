@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { createClient } from './supabase/client';
+import { isAfter, isBefore, isToday } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -67,4 +68,45 @@ export function slugify(text: string) {
     .replace(/\_/g, '-') // Replace _ with -
     .replace(/\-\-+/g, '-') // Replace multiple - with single -
     .replace(/\-$/g, ''); // Remove trailing -
+}
+
+export function getCampaignStatus(
+  start_date: Date,
+  end_date: Date,
+  cancelled: boolean
+) {
+  const today = new Date();
+
+  if (cancelled) {
+    return {
+      status: 'CANCELLED',
+      class: 'bg-red-500 hover:bg-red-500 text-white',
+    };
+  }
+
+  if (isBefore(today, start_date)) {
+    return {
+      status: 'PENDING',
+      class: 'bg-orange-500 hover:bg-orange-500 text-white',
+    };
+  }
+
+  if (isAfter(today, end_date)) {
+    return {
+      status: 'COMPLETED',
+      class: 'bg-green-500 hover:bg-green-500 text-white',
+    };
+  }
+
+  if (isToday(start_date) || isToday(end_date)) {
+    return {
+      status: 'RUNNING',
+      class: 'bg-primary hover:bg-primary text-white',
+    };
+  }
+
+  return {
+    status: 'RUNNING',
+    class: 'bg-primary hover:bg-primary text-white',
+  }; // Default to RUNNING if today is between start_date and end_date
 }
