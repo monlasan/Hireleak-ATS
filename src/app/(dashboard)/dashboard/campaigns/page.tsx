@@ -35,10 +35,6 @@ const Campaigns = () => {
                 <SheetContent className='w-full sm:max-w-max'>
                   <SheetHeader className='pb-4'>
                     <SheetTitle>New campaign</SheetTitle>
-                    {/* <SheetDescription>
-                      Make changes to your profile here. Click save when you're
-                      done.
-                    </SheetDescription> */}
                   </SheetHeader>
                   <NewCampaignForm />
                 </SheetContent>

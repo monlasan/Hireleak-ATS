@@ -17,6 +17,7 @@ import { Download, Plus } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import NewCampaignForm from '@/components/NewCampaignForm';
+import WelcomeUser from '@/components/WelcomeUser';
 
 const Dashboard = () => {
   const userData = [
@@ -141,9 +142,7 @@ const Dashboard = () => {
           <div className='pt-10 pb-24 flex flex-col gap-4'>
             <div className='grid md:grid-cols-2 gap-5 text-white '>
               <div className=''>
-                <h1 className='text-3xl font-light'>
-                  Welcome back, <span className='font-semibold'>Khaled</span>
-                </h1>
+                <WelcomeUser />
                 <p className='text-zinc-400 mt-2'>
                   Have an insight on all the important metrics about your
                   campaigns.
