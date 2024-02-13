@@ -22,7 +22,7 @@ import {
   Link as LinkIcon,
 } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
+import { cn, getCampaignStatus } from '@/lib/utils';
 import Link from 'next/link';
 import CampaignPortalClipboard from '@/components/CampaignPortalClipboard';
 import CopyClipboardButton from '@/components/CopyClipboardButton';
@@ -31,7 +31,7 @@ import { getCampaign, updateCampaign } from '@/lib/actions/campaign.actions';
 import { toast } from 'sonner';
 import { type Campaign } from '@/lib/types';
 import EditCampaignForm from '@/components/EditCampaignForm';
-import BtnCancelCampaign from '@/components/BtnCancelCampaign';
+import BtnResumeOrCancelCampaign from '@/components/BtnResumeOrCancelCampaign';
 
 const Campaign = async ({ params }: { params: { id: string } }) => {
   const result = await getCampaign(parseInt(params.id));
@@ -78,7 +78,17 @@ const Campaign = async ({ params }: { params: { id: string } }) => {
           <div className='flex items-center gap-3'>
             <Sheet>
               <SheetTrigger asChild>
-                <Button size='sm' variant='white'>
+                <Button
+                  disabled={
+                    getCampaignStatus(
+                      new Date(campaign.starting_date),
+                      new Date(campaign.end_date),
+                      campaign.status === 'CANCELLED'
+                    ).status === 'RUNNING'
+                  }
+                  size='sm'
+                  variant='white'
+                >
                   <FileSliders size={18} className='mr-2' />
                   Edit campaign
                 </Button>
@@ -90,7 +100,7 @@ const Campaign = async ({ params }: { params: { id: string } }) => {
                 <EditCampaignForm campaign={campaign} />
               </SheetContent>
             </Sheet>
-            <BtnCancelCampaign campaign={campaign} />
+            <BtnResumeOrCancelCampaign campaign={campaign} />
             {/* <Button onClick={cancelCampaign} size='sm' variant='destructive'>
               <Ban size={18} className='mr-2' />
               Cancel campaign

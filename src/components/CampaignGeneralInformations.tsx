@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from './ui/scroll-area';
 import { type Campaign } from '@/lib/types';
-import { formatDate } from '@/lib/utils';
+import { cn, formatDate, getCampaignStatus } from '@/lib/utils';
 
 const CampaignGeneralInformations = ({ campaign }: { campaign: Campaign }) => {
   return (
@@ -24,7 +24,23 @@ const CampaignGeneralInformations = ({ campaign }: { campaign: Campaign }) => {
       <div className='py-3 px-4 flex flex-col gap-2'>
         <div className='flex items-center justify-between '>
           <span className='opacity-50 whitespace-nowrap text-sm'>Status:</span>
-          <Badge>{campaign.status}</Badge>
+          <Badge
+            className={cn(
+              getCampaignStatus(
+                new Date(campaign.starting_date),
+                new Date(campaign.end_date),
+                campaign.status === 'CANCELLED'
+              ).class
+            )}
+          >
+            {
+              getCampaignStatus(
+                new Date(campaign.starting_date),
+                new Date(campaign.end_date),
+                campaign.status === 'CANCELLED'
+              ).status
+            }
+          </Badge>
         </div>
         <div className='flex items-center gap-8 justify-between '>
           <span className='opacity-50 whitespace-nowrap text-sm'>
