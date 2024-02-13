@@ -223,13 +223,13 @@ const CampaignApplicationForm = ({ campaign }: { campaign: Campaign }) => {
         toast.success(
           'You have successfully submitted your application. We will get back to you shortly.'
         );
-        console.log('✅ SUBMITTED APPLICATION', data);
-        setFileInfos(null);
-        setFile(null);
-        setEditorText((v) => (v = ''));
-        form.reset();
-        setIsLoading(false);
         router.push('/thank-you');
+        // console.log('✅ SUBMITTED APPLICATION', data);
+        // setFileInfos(null);
+        // setFile(null);
+        // setEditorText((v) => (v = ''));
+        // form.reset();
+        // setIsLoading(false);
       }
     }
     // let cover_letter = '';
