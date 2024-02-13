@@ -14,7 +14,7 @@ const CampaignPortalClipboard = ({ url }: { url: string }) => {
     copy(text)
       .then(() => {
         setIsCopied((c) => (c = true));
-        setTimeout(() => setIsCopied((c) => (c = false)), 2000);
+        setTimeout(() => setIsCopied((c) => (c = false)), 500);
       })
       .catch((error) => {
         toast.error('Failed to copy!');

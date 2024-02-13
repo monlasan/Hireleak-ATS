@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 import { type Campaign } from '@/lib/types';
 import { updateCampaign } from '@/lib/actions/campaign.actions';
 import { useRouter } from 'next/navigation';
+import { getCampaignStatus } from '@/lib/utils';
 
 const BtnResumeOrCancelCampaign = ({ campaign }: { campaign: Campaign }) => {
   const router = useRouter();
@@ -42,7 +43,32 @@ const BtnResumeOrCancelCampaign = ({ campaign }: { campaign: Campaign }) => {
 
   return (
     <>
-      {campaign.status !== 'CANCELLED' ? (
+      {campaign.status === 'CANCELLED' ||
+      getCampaignStatus(
+        new Date(campaign.starting_date),
+        new Date(campaign.end_date),
+        campaign.status === 'CANCELLED'
+      ).status === 'COMPLETED' ? (
+        <Button
+          disabled={
+            isPending ||
+            getCampaignStatus(
+              new Date(campaign.starting_date),
+              new Date(campaign.end_date),
+              campaign.status === 'CANCELLED'
+            ).status === 'COMPLETED'
+          }
+          onClick={resumeCampaign}
+          size='sm'
+        >
+          {isPending ? (
+            <Loader size={18} className='mr-2 animate-spin' />
+          ) : (
+            <StepForward size={18} className='mr-2' />
+          )}
+          Resume campaign
+        </Button>
+      ) : (
         <Button
           disabled={isPending}
           onClick={cancelCampaign}
@@ -55,15 +81,6 @@ const BtnResumeOrCancelCampaign = ({ campaign }: { campaign: Campaign }) => {
             <Ban size={18} className='mr-2' />
           )}
           Cancel campaign
-        </Button>
-      ) : (
-        <Button disabled={isPending} onClick={resumeCampaign} size='sm'>
-          {isPending ? (
-            <Loader size={18} className='mr-2 animate-spin' />
-          ) : (
-            <StepForward size={18} className='mr-2' />
-          )}
-          Resume campaign
         </Button>
       )}
     </>

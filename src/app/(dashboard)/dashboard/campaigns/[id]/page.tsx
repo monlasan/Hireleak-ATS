@@ -84,7 +84,12 @@ const Campaign = async ({ params }: { params: { id: string } }) => {
                       new Date(campaign.starting_date),
                       new Date(campaign.end_date),
                       campaign.status === 'CANCELLED'
-                    ).status === 'RUNNING'
+                    ).status === 'RUNNING' ||
+                    getCampaignStatus(
+                      new Date(campaign.starting_date),
+                      new Date(campaign.end_date),
+                      campaign.status === 'CANCELLED'
+                    ).status === 'COMPLETED'
                   }
                   size='sm'
                   variant='white'
