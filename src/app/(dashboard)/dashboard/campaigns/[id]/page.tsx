@@ -41,7 +41,7 @@ const Campaign = async ({ params }: { params: { id: string } }) => {
     return <div>Something went wrong while fetching the campaign.</div>;
   }
   const campaign: Campaign = data[0];
-  const campaign_url = `${process.env.NEXT_PUBLIC_IFRAME_URL}/apply/${campaign.organization?.name_slug}/${campaign.organization?.id}/${campaign.slug}/`;
+  const campaign_url = `${process.env.NEXT_PUBLIC_IFRAME_URL}/apply/${campaign.organization?.name_slug}/${campaign.id}/${campaign.slug}/`;
   /**
    * TODO: Don't forget to make this iframe text dynamic
    */

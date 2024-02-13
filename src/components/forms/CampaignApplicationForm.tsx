@@ -35,6 +35,7 @@ import { Card } from '../ui/card';
 import TiptapEditor from '../TipTapEditor';
 import { APP_NAME } from '@/lib/constants';
 import { enlistApplicant } from '@/lib/actions/applicant.actions';
+import { type Campaign } from '@/lib/types';
 
 const formSchema = z.object({
   first_name: z.string().min(1, 'Enter a your first name.').max(20),
@@ -47,15 +48,7 @@ type FileInfos = {
   filesize: number;
 };
 
-type Props = {
-  campaignInfos: {
-    organizationSlug: string;
-    campaignId: string;
-    campaignSlug: string;
-  };
-};
-
-const CampaignApplicationForm = ({ campaignInfos }: Props) => {
+const CampaignApplicationForm = ({ campaign }: { campaign: Campaign }) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [noCoverLetter, setNoJobDescription] = React.useState(false);
@@ -211,7 +204,7 @@ const CampaignApplicationForm = ({ campaignInfos }: Props) => {
     } else {
       // do someting
       const result = await enlistApplicant({
-        campaign_id: parseInt(campaignInfos.campaignId),
+        campaign_id: campaign.id!,
         email: values.email,
         first_name: values.first_name,
         last_name: values.last_name,
@@ -271,15 +264,11 @@ const CampaignApplicationForm = ({ campaignInfos }: Props) => {
         >
           <div className='flex flex-col items-center gap-4 w-full justify-center'>
             <div className='flex items-center text-center justify-center gap-1 flex-col'>
-              {false ? (
-                <Image
-                  src='/round-image-placeholder.png'
-                  alt='Organization logo '
-                  width={110}
-                  height={110}
-                  className='object-contain'
-                />
+              {campaign?.organization?.logo_url &&
+              campaign.organization.logo_url.length > 0 ? (
+                'az'
               ) : (
+                // TODO: ADD IMAGE HERE
                 <Image
                   src='/round-image-placeholder.png'
                   alt='Organization logo placeholder image'
@@ -293,63 +282,39 @@ const CampaignApplicationForm = ({ campaignInfos }: Props) => {
               )}
               <p className='flex items-center justify-center flex-col  text-center text-3xl font-semibold'>
                 <span className='text-primary text-xl font-bold my-3 inline-block'>
-                  OpenSIz
+                  {campaign?.organization?.name}
                 </span>{' '}
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button
-                      size='sm'
-                      className='text-center mb-3'
-                      variant='outline'
-                    >
-                      <BookOpen className='mr-3 opacity-80' size={18} /> Read
-                      job description
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className='w-full max-w-4xl'>
-                    <DialogHeader>
-                      <DialogTitle>Job description</DialogTitle>
-                      <DialogDescription>
-                        Senior software engineer
-                      </DialogDescription>
-                    </DialogHeader>
-                    <Card className='text-sm font-normal flex flex-col gap-3'>
-                      <ScrollArea className='h-[300px] p-4'>
-                        {JSON.stringify(campaignInfos)}
-                        =========================== Jokester began sneaking into
-                        the castle in the middle of the night and leaving jokes
-                        all over the place: under the king's pillow, in his
-                        soup, even in the royal toilet. The king was furious,
-                        but he couldn't seem to stop Jokester. And then, one
-                        day, the people of the kingdom discovered that the jokes
-                        left by Jokester were so funny that they couldn't help
-                        but laugh. And once they started laughing, they couldn't
-                        stop.
-                        <p>
-                          Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Magni eius doloribus molestiae voluptas
-                          exercitationem quibusdam quo, similique dolore dolor
-                          ex? Molestiae dolor ad nisi molestias exercitationem!
-                          Quas odio porro expedita. Lorem ipsum dolor, sit amet
-                          consectetur adipisicing elit.
-                        </p>
-                        <p>
-                          Magni eius doloribus molestiae voluptas exercitationem
-                          quibusdam quo, similique dolore dolor ex? Molestiae
-                          dolor ad nisi molestias exercitationem! Quas odio
-                          porro expedita. Lorem ipsum dolor, sit amet
-                          consectetur adipisicing elit. Magni eius doloribus
-                          molestiae voluptas exercitationem quibusdam quo,
-                          similique dolore dolor ex? Molestiae dolor ad nisi
-                          molestias exercitationem! Quas odio porro expedita.
-                        </p>
-                      </ScrollArea>
-                    </Card>
-                  </DialogContent>
-                </Dialog>
-                <span className='mt-1 inline-block'>
-                  Senior frontend developer
-                </span>
+                {campaign.show_job_description && (
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        size='sm'
+                        className='text-center mb-3'
+                        variant='outline'
+                      >
+                        <BookOpen className='mr-3 opacity-80' size={18} /> Read
+                        job description
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className='w-full max-w-4xl'>
+                      <DialogHeader>
+                        <DialogTitle>Job description</DialogTitle>
+                        <DialogDescription>{campaign.name}</DialogDescription>
+                      </DialogHeader>
+                      <Card className='text-sm font-normal flex flex-col gap-3'>
+                        <ScrollArea className='h-[300px] p-4'>
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: campaign.job_description,
+                            }}
+                            className='w-full h-full prose prose-h1:my-1 prose-h2:my-1 prose-h3:my-1 prose-h4::my-1 prose-h5:my-1 prose-h6:my-1 prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-blockquote:my-1'
+                          />
+                        </ScrollArea>
+                      </Card>
+                    </DialogContent>
+                  </Dialog>
+                )}
+                <span className='mt-1 inline-block'>{campaign.name}</span>
               </p>
             </div>
           </div>

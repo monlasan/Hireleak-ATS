@@ -58,6 +58,7 @@ export type Campaign = {
     id: number;
     name: string;
     name_slug: string;
+    logo_url?: string;
   };
   created_at?: Date;
   updated_at?: Date;

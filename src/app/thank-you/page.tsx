@@ -3,7 +3,7 @@ import React from 'react';
 
 const ThankYou = () => {
   return (
-    <div className='w-screen gap-6 h-screen flex justify-center flex-col items-center'>
+    <div className='w-screen p-8 gap-6 h-screen flex justify-center flex-col items-center'>
       <div>
         <CheckCircle size={100} className='text-emerald-500' />
       </div>
