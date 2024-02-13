@@ -126,7 +126,7 @@
   outline: none;
   height: 100px;
   /* height: 400px; */
-  max-width: 472px;
+  width: 472px;
   overflow: auto;
   transition: height 0.4s;
 }
