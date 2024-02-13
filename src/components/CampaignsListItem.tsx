@@ -1,6 +1,12 @@
 import { type Campaign } from '@/lib/types';
 import { Badge } from './ui/badge';
 import { Card } from './ui/card';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import Link from 'next/link';
 import { formatDate } from '@/lib/utils';
 
@@ -9,20 +15,29 @@ type Props = {
 };
 const CampaignListItem = ({ campaign }: Props) => {
   return (
-    <Link href={'campaigns/' + campaign.id}>
-      <Card className='hover:border hover:shadow-xl hover:shadow-primary/5 transition-colors hover:border-primary/80 flex flex-col'>
+    <Link className='h-full' href={'campaigns/' + campaign.id}>
+      <Card className='h-full hover:border hover:shadow-xl hover:shadow-primary/5 transition-colors hover:border-primary/80 flex flex-col'>
         <div className='p-4 border-b'>
           <div className='flex justify-between items-start gap-2'>
-            <h3 className='font-semibold text-lg leading-tight'>
-              {campaign.name}
-            </h3>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <h3 className='font-semibold text-lg leading-tight truncate'>
+                    {campaign.name}
+                  </h3>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <span>{campaign.name}</span>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
             <Badge>{campaign.status}</Badge>
           </div>
           <span className='text-sm opacity-60 text-right'>
             {campaign.created_at && formatDate(campaign.created_at)}
           </span>
         </div>
-        <div className='p-4 flex flex-col gap-4'>
+        <div className='p-4 flex flex-col justify-between gap-4'>
           <div>
             <div className='flex items-center justify-between'>
               <b className='opacity-80 text-xs'>Start</b>

@@ -4,10 +4,19 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import DatatablePassingApplicants from '@/components/datatables/Datatable-PassingApplicants';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Download, Plus } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
+import NewCampaignForm from '@/components/NewCampaignForm';
 
 const Dashboard = () => {
   const userData = [
@@ -142,13 +151,24 @@ const Dashboard = () => {
               </div>
               {/* <div className='flex flex-col md:justify-end md:items-end'> */}
               <div className='flex flex-col md:items-end md:justify-end'>
-                <Link
-                  className={buttonVariants()}
-                  href='/dashboard/new/campaign'
-                >
-                  <Plus className='mr-2' />
-                  Create new campaign
-                </Link>
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Button>
+                      <Plus className='mr-2' />
+                      Create campaign
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent className='w-full sm:max-w-max'>
+                    <SheetHeader className='pb-4'>
+                      <SheetTitle>New campaign</SheetTitle>
+                      {/* <SheetDescription>
+                      Make changes to your profile here. Click save when you're
+                      done.
+                    </SheetDescription> */}
+                    </SheetHeader>
+                    <NewCampaignForm />
+                  </SheetContent>
+                </Sheet>
               </div>
             </div>
           </div>

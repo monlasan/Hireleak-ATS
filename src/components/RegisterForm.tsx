@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Loader } from 'lucide-react';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
+import { cn, slugify } from '@/lib/utils';
 import Link from 'next/link';
 import { APP_NAME } from '@/lib/constants';
 import { signUpWithEmailAndPassword } from '@/lib/actions/auth-server.actions';
@@ -146,7 +146,11 @@ const RegisterForm = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
       // todo: Add logic to upload image to ImbBB
-      const res_organization = await createOrganization(values.org_name, '');
+      const res_organization = await createOrganization(
+        values.org_name,
+        '',
+        slugify(values.org_name)
+      );
       const { data: data_org, error: error_org } = JSON.parse(res_organization);
       if (error_org?.message) {
         toast.error(

@@ -10,6 +10,7 @@ const CampaignsList = async () => {
   }
 
   return (
+    // <div className='flex flex-wrap gap-3'>
     <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-3'>
       {campaigns.map((campaign: Campaign) => (
         <CampaignsListItem campaign={campaign} key={campaign.id} />

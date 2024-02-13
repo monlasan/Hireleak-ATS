@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { Toaster } from '@/components/ui/sonner';
 import Providers from '@/components/Providers';
 import { APP_NAME } from '@/lib/constants';
+import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
 
 /**
  * TODO: Maybe i can add iframe functionality to allow companies to host their campaign application portal page.
@@ -25,11 +27,15 @@ export const metadata: Metadata = {
   description: 'Leverage AI to automate your recruitment process.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const cookieStore = cookies();
+  // const supabase = createClient(cookieStore);
+  // const { data, error } = await supabase.auth.getUser();
+
   return (
     <html lang='en' suppressHydrationWarning className='relative'>
       <body className={`${poppins.className} antialiased`}>
@@ -43,6 +49,7 @@ export default function RootLayout({
             PORTAL
           </Link>
         </div>
+        {/* <Providers user={data.user}> */}
         <Providers>
           {children}
           <Toaster

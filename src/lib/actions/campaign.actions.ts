@@ -13,6 +13,17 @@ export async function fetchCampaigns() {
   return JSON.stringify(result);
 }
 
+export async function getCampaign(campaignId: number) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const result = await supabase
+    .from('campaigns')
+    .select('*, applicants(*), organization:organizations(id,name, name_slug)')
+    .eq('id', campaignId);
+  revalidatePath('/dashboard/campaigns/' + campaignId);
+  return JSON.stringify(result);
+}
+
 export async function createCampaign(campaign: Campaign) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
@@ -21,6 +32,16 @@ export async function createCampaign(campaign: Campaign) {
     .insert({ ...campaign })
     .select();
   revalidatePath('/dashboard/campaigns');
+  return JSON.stringify(result);
+}
+export async function updateCampaign(campaignId: number, campaign: Campaign) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const result = await supabase
+    .from('campaigns')
+    .update({ ...campaign })
+    .eq('id', campaignId);
+  revalidatePath('/dashboard/campaigns/' + campaignId);
   return JSON.stringify(result);
 }
 

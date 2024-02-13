@@ -6,17 +6,41 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import { DataTable } from '@/components/data-table';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Copy, Download, Link as LinkIcon } from 'lucide-react';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import {
+  Ban,
+  Copy,
+  Download,
+  FileSliders,
+  Link as LinkIcon,
+} from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import CampaignPortalClipboard from '@/components/CampaignPortalClipboard';
 import CopyClipboardButton from '@/components/CopyClipboardButton';
 import DatatableCampaignApplicants from '@/components/datatables/DatatableCampaignApplicants';
+import { getCampaign } from '@/lib/actions/campaign.actions';
+import { toast } from 'sonner';
+import { type Campaign } from '@/lib/types';
+import EditCampaignForm from '@/components/EditCampaignForm';
 
-const Campaign = async () => {
-  const campaign_url =
-    'https://embauch.io/apply/opensi/senior-frontend-software-engineer/';
+const Campaign = async ({ params }: { params: { id: string } }) => {
+  const result = await getCampaign(parseInt(params.id));
+  const { data, error } = JSON.parse(result);
+  if (error?.message) {
+    toast.error(error?.message);
+    return <div>Something went wrong while fetching the campaign.</div>;
+  }
+  const campaign: Campaign = data[0];
+  const campaign_url = `${process.env.NEXT_PUBLIC_IFRAME_URL}/apply/${campaign.organization?.name_slug}/${campaign.organization?.id}/${campaign.slug}/`;
   /**
    * TODO: Don't forget to make this iframe text dynamic
    */
@@ -34,18 +58,32 @@ const Campaign = async () => {
       <div className='py-16 pt-8 flex flex-col gap-4'>
         <div className='flex  flex-wrap justify-between gap-3'>
           <h1 className='text-3xl font-semibold text-foreground'>
-            Senior FrontEnd Developer
+            {campaign.name}
           </h1>
           <div className='flex items-center gap-3'>
-            <Button size='sm' variant='white'>
-              Update campaign
-            </Button>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button size='sm' variant='white'>
+                  <FileSliders size={18} className='mr-2' />
+                  Edit campaign
+                </Button>
+              </SheetTrigger>
+              <SheetContent className='w-full sm:max-w-max'>
+                <SheetHeader className='pb-4'>
+                  <SheetTitle>Update campaign</SheetTitle>
+                </SheetHeader>
+                <EditCampaignForm campaign={campaign} />
+              </SheetContent>
+            </Sheet>
             <Button size='sm' variant='destructive'>
+              <Ban size={18} className='mr-2' />
               Cancel campaign
             </Button>
           </div>
         </div>
         <div className='flex flex-col lg:flex-row flex-1 gap-4'>
+          <CampaignGeneralInformations campaign={campaign} />
+
           <Card className='p-4 w-full lg:max-w-3xl'>
             <h3 className='font-medium mb-2 text-lg text-foreground'>
               Campaign portal
@@ -78,20 +116,8 @@ const Campaign = async () => {
               </div>
             </div>
           </Card>
-          <CampaignGeneralInformations />
         </div>
-        <Card className='p-4'>
-          <div className='flex mb-4 flex-wrap items-center justify-between gap-3'>
-            <h3 className='font-medium text-lg text-foreground'>
-              Applicants (20)
-            </h3>
-            <Button size='sm' variant='outline'>
-              <Download className='mr-2' size={21} />
-              Export to CSV
-            </Button>
-          </div>
-          <DatatableCampaignApplicants />
-        </Card>
+        <DatatableCampaignApplicants applicants={campaign?.applicants!} />
       </div>
     </MaxWidthWrapper>
   );

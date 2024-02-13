@@ -50,9 +50,15 @@ export type Campaign = {
   applicants_limit: number;
   acceptance_percentage: number;
   status: string;
+  slug: string;
   results?: any;
-  applicants?: any[];
+  applicants?: Applicant[];
   organization_id: number;
-  created_at?: Date | undefined;
+  organization?: {
+    id: number;
+    name: string;
+    name_slug: string;
+  };
+  created_at?: Date;
   updated_at?: Date;
 };

@@ -24,14 +24,15 @@ import * as z from 'zod';
 import { Button } from './ui/button';
 import { cn, slugify } from '@/lib/utils';
 import { format } from 'date-fns';
-import { CalendarIcon, FilePlus, Loader } from 'lucide-react';
+import { CalendarIcon, FilePenLine, FilePlus, Loader } from 'lucide-react';
 import { toast } from 'sonner';
 import TiptapEditor from './TipTapEditor';
 import { Card } from './ui/card';
 import { ScrollArea } from './ui/scroll-area';
-import { createCampaign } from '@/lib/actions/campaign.actions';
+import { createCampaign, updateCampaign } from '@/lib/actions/campaign.actions';
 import { useUser } from '@/store/user.store';
 import { useRouter } from 'next/navigation';
+import { type Campaign } from '@/lib/types';
 
 /**
  * TODO: For the date inputs, add logic to make sure that the end date is always after the start date.
@@ -55,13 +56,15 @@ const formSchema = z.object({
     .gte(1, 'Please enter an acceptance percentage for the campaign.'),
 });
 
-const NewCampaignForm = () => {
+const EditCampaignForm = ({ campaign }: { campaign: Campaign }) => {
   const router = useRouter();
   const { user } = useUser();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [notJobDescription, setNoJobDescription] = React.useState(false);
-  const [editorText, setEditorText] = React.useState('');
-  const [isChecked, setIsChecked] = React.useState(true);
+  const [editorText, setEditorText] = React.useState(campaign.job_description);
+  const [isChecked, setIsChecked] = React.useState(
+    campaign.show_job_description
+  );
 
   const handleToggle = () => {
     setIsChecked(!isChecked);
@@ -70,14 +73,15 @@ const NewCampaignForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      limit: 1,
-      acceptance_percentage: 1,
+      name: campaign.name,
+      limit: campaign.applicants_limit,
+      acceptance_percentage: campaign.acceptance_percentage,
+      start_date: new Date(campaign.starting_date),
+      end_date: new Date(campaign.end_date),
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // console.log('editorText', editorText);
     if (
       !editorText ||
       editorText === '<p></p>' ||
@@ -88,19 +92,17 @@ const NewCampaignForm = () => {
     }
     setNoJobDescription((v) => (v = false));
     setIsSubmitting(true);
-    const result = await createCampaign({
+    const result = await updateCampaign(campaign.id!, {
       name: values.name,
       applicants_limit: values.limit,
       end_date: values.end_date,
       starting_date: values.start_date,
-      status: 'PENDING',
+      status: campaign.status,
       slug: slugify(values.name),
       acceptance_percentage: values.acceptance_percentage,
       job_description: editorText,
       show_job_description: isChecked,
-      organization_id: user?.user_metadata
-        ? user?.user_metadata.organization.id
-        : 0,
+      organization_id: campaign.organization_id,
     });
     const { data, error } = JSON.parse(result);
     if (error?.message) {
@@ -108,9 +110,7 @@ const NewCampaignForm = () => {
       return;
     }
     setIsSubmitting(false);
-    toast.success('Campaign created successfully');
-    router.push('/dashboard/campaigns/' + data[0].id);
-    // console.log('✅CAMPAIGN CREATED', data);
+    toast.success('Campaign updated successfully');
   }
 
   return (
@@ -320,12 +320,12 @@ const NewCampaignForm = () => {
         {isSubmitting ? (
           <Loader size={18} className='animate-spin mr-2' />
         ) : (
-          <FilePlus size={18} className='mr-2' />
+          <FilePenLine size={18} className='mr-2' />
         )}
-        Create campaign
+        Update campaign
       </Button>
     </ScrollArea>
   );
 };
 
-export default NewCampaignForm;
+export default EditCampaignForm;
