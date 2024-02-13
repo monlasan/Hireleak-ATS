@@ -18,7 +18,16 @@ const LoadingApplicationPage = () => {
             <Skeleton className='rounded-md w-full h-6' />
           </div>
         </div>
-        <Skeleton className='rounded-md w-full h-4' />
+        <div className='flex w-full gap-4'>
+          <div className='w-full'>
+            <Skeleton className='rounded-md w-16 h-4 mb-3' />
+            <Skeleton className='rounded-md w-full h-6' />
+          </div>
+          <div className='w-full'>
+            <Skeleton className='rounded-md w-16 h-4 mb-3' />
+            <Skeleton className='rounded-md w-full h-6' />
+          </div>
+        </div>
         <div className='w-full'>
           <Skeleton className='rounded-md w-16 h-4 mb-3' />
           <Skeleton className='rounded-md w-full h-32' />

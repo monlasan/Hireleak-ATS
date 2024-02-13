@@ -3,7 +3,7 @@ import CampaignApplicationForm from '@/components/forms/CampaignApplicationForm'
 import { Skeleton } from '@/components/ui/skeleton';
 import { getCampaign } from '@/lib/actions/campaign.actions';
 import { getCampaignStatus } from '@/lib/utils';
-import { Ban, TicketX } from 'lucide-react';
+import { Ban, FileX, TicketX } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import React from 'react';
 import { toast } from 'sonner';
@@ -57,7 +57,26 @@ const CampaignPortal = async ({ params }: Props) => {
           <TicketX size={100} className='text-destructive' />
         </div>
         <h1 className='text-center font-bold text-3xl max-w-xl'>
-          Sorry! This job is not available anymore 😖.
+          Sorry! The applications for this jobs are closed 😖.
+        </h1>
+      </div>
+    );
+    // notFound();
+  }
+  if (
+    getCampaignStatus(
+      new Date(campaign[0].starting_date),
+      new Date(campaign[0].end_date),
+      campaign[0].status === 'CANCELLED'
+    ).status === 'PENDING'
+  ) {
+    return (
+      <div className='w-screen p-8 gap-6 h-screen flex justify-center flex-col items-center'>
+        <div>
+          <FileX size={100} className='text-orange-500' />
+        </div>
+        <h1 className='text-center font-bold text-3xl max-w-xl'>
+          This job not yet open of applications.
         </h1>
       </div>
     );

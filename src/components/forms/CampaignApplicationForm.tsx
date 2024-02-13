@@ -38,9 +38,10 @@ import { enlistApplicant } from '@/lib/actions/applicant.actions';
 import { type Campaign } from '@/lib/types';
 
 const formSchema = z.object({
-  first_name: z.string().min(1, 'Enter a your first name.').max(20),
-  last_name: z.string().min(1, 'Enter a your last name.').max(20),
+  first_name: z.string().min(1, 'Enter your first name.').max(20),
+  last_name: z.string().min(1, 'Enter your last name.').max(20),
   email: z.string().email('Enter a valid email'),
+  phone_number: z.string().min(1, 'Enter your phone number.').max(20),
 });
 
 type FileInfos = {
@@ -173,6 +174,7 @@ const CampaignApplicationForm = ({ campaign }: { campaign: Campaign }) => {
       first_name: '',
       last_name: '',
       email: '',
+      phone_number: '',
     },
   });
 
@@ -205,9 +207,10 @@ const CampaignApplicationForm = ({ campaign }: { campaign: Campaign }) => {
       // do someting
       const result = await enlistApplicant({
         campaign_id: campaign.id!,
-        email: values.email,
         first_name: values.first_name,
         last_name: values.last_name,
+        email: values.email,
+        phone_number: values.phone_number,
         cover_letter: editorText,
         resume_url:
           process.env.NEXT_PUBLIC_SUPABASE_URL +
@@ -356,25 +359,45 @@ const CampaignApplicationForm = ({ campaign }: { campaign: Campaign }) => {
               )}
             />
           </div>
-
-          <FormField
-            control={form.control}
-            name='email'
-            render={({ field }) => (
-              <FormItem className='relative '>
-                <FormLabel className='text-zinc-600'>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500 '
-                    disabled={loading}
-                    placeholder='Enter your email address'
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage className='absolute top-0 translate-y-[66px] left-0' />
-              </FormItem>
-            )}
-          />
+          <div className='flex flex-col sm:flex-row items-center gap-4 gap-y-6'>
+            <FormField
+              control={form.control}
+              name='email'
+              render={({ field }) => (
+                <FormItem className='relative flex-1 w-full'>
+                  <FormLabel className='text-zinc-600'>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500 '
+                      disabled={loading}
+                      placeholder='Enter your email address'
+                      type='email'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className='absolute top-0 translate-y-[66px] left-0' />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='phone_number'
+              render={({ field }) => (
+                <FormItem className='relative flex-1 w-full'>
+                  <FormLabel className='text-zinc-600'>Phone number</FormLabel>
+                  <FormControl>
+                    <Input
+                      className='bg-zinc-100 border-zinc-200 text-zinc-700 placeholder:text-zinc-500 '
+                      disabled={loading}
+                      placeholder='Enter your phone number'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage className='absolute top-0 translate-y-[66px] left-0' />
+                </FormItem>
+              )}
+            />
+          </div>
 
           <div className='flex items-center justify-center gap-1 pt-3 flex-col'>
             <span className='text-xs text-left w-full text-zinc-600 font-medium inline-block mb-1'>
@@ -418,7 +441,7 @@ const CampaignApplicationForm = ({ campaign }: { campaign: Campaign }) => {
                     )}
                   />
                   <div className='text-zinc-500 text-center text-xs'>
-                    Drxag and drop your resume here. Or{' '}
+                    Drag and drop your resume here. Or{' '}
                     <span className='text-primary'>click to upload</span> <br />
                     (PDF, DOC, DOCX)
                   </div>

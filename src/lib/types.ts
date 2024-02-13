@@ -29,7 +29,7 @@ export type Applicant = {
   first_name: string;
   last_name: string;
   email: string;
-  phone_number?: number;
+  phone_number?: string;
   resume_url: string;
   photo_url?: string;
   cover_letter?: string;
