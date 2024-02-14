@@ -23,7 +23,7 @@ const HeaderBackground = () => {
     <div
       className={cn(
         'inset-0 absolute transition-all -z-10',
-        navbar && 'bg-white'
+        navbar && 'bg-white shadow-md shadow-zinc-300/20'
       )}
     ></div>
   );

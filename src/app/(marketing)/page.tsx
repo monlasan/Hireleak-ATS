@@ -6,10 +6,11 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Github, Twitter } from 'lucide-react';
 import Image from 'next/image';
 import HeaderBackground from '@/components/HeaderBackground';
 import { StickyScroll } from '@/components/ui/sticky-scroll-reveal';
+import Footer from '@/components/Footer';
 
 // const poppins = Poppins({
 //   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -109,7 +110,36 @@ export default function Home() {
           </MaxWidthWrapper>
         </section>
       </main>
-      <footer>FOOTER</footer>
+      <section className='py-16 bg-primary'>
+        <MaxWidthWrapper className='justify-center gap-6 flex flex-col'>
+          <h2 className='text-3xl font-bold text-white text-center'>
+            Start your recruitment campaign now.
+          </h2>
+          <div className='flex mx-auto flex-col sm:flex-row justify-center items-center gap-4 gap-y-2'>
+            <Link className=' w-full' href='/sign-up'>
+              <Button
+                size='lg'
+                className='bg-zinc-800 w-full hover:bg-zinc-900 text-white group'
+              >
+                Get started{' '}
+                <ArrowRight
+                  className='ml-2 group-hover:translate-x-1 transition-transform'
+                  size={20}
+                />
+              </Button>
+            </Link>
+            <Link className=' w-full' href='/sign-in'>
+              <Button
+                size='lg'
+                className='bg-white w-full hover:bg-zinc-100 text-zinc-800'
+              >
+                Sign In
+              </Button>
+            </Link>
+          </div>
+        </MaxWidthWrapper>
+      </section>
+      <Footer />
     </>
   );
 }

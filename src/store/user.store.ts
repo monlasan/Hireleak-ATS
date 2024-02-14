@@ -19,7 +19,6 @@ export const useUser = create(
     }),
     {
       name: 'user_store',
-      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );

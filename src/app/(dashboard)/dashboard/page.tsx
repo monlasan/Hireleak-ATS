@@ -152,7 +152,7 @@ const Dashboard = () => {
               <div className='flex flex-col md:items-end md:justify-end'>
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button>
+                    <Button className='w-fit'>
                       <Plus className='mr-2' />
                       Create campaign
                     </Button>
@@ -192,7 +192,7 @@ const Dashboard = () => {
                 </Button>
               </div> */}
               {/* <ScrollArea className='w-full flex-1 h-[300px] '> */}
-              <DatatablePassingApplicants />
+              {/* <DatatablePassingApplicants /> */}
               {/* </ScrollArea> */}
             </Card>
           </div>

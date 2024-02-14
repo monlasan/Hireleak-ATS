@@ -4,7 +4,7 @@ import Link from 'next/link';
 type Props = {
   hideLabel?: boolean;
   url?: string;
-  color?: string;
+  color?: 'B' | 'W' | 'CC' | 'CB' | 'WB' | 'BW';
 };
 const AppLogoHeader = ({ hideLabel, url = '/', color = 'CB' }: Props) => {
   let img = '';

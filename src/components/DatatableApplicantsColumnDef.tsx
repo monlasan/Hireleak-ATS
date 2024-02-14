@@ -17,7 +17,7 @@ import { MoreHorizontal } from 'lucide-react';
 export const columns: ColumnDef<Applicant>[] = [
   {
     accessorKey: 'first_name',
-    header: 'Name',
+    header: 'Applicant name',
     cell: ({ row }) => {
       const item = row.original;
       const fullName: string = item.first_name + ' ' + item.last_name;
