@@ -1,7 +1,7 @@
 import ChartApplicantsNumbersByCampaign from '@/components/ChartApplicantsNumbersByCampaign';
 import { ChartStatusOfCampains } from '@/components/ChartStatusOfCampains';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import DatatablePassingApplicants from '@/components/datatables/Datatable-PassingApplicants';
+// import DatatablePassingApplicants from '@/components/datatables/Datatable-PassingApplicants';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {

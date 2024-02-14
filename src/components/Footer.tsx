@@ -10,9 +10,9 @@ const Footer = () => {
     <footer className='py-10 bg-zinc-800 text-white'>
       <MaxWidthWrapper>
         <div className='flex flex-col md:flex-row gap-8'>
-          <Link href='/' className='flex-1 max-w-48 lg:max-w-64'>
+          <div className='flex-1 max-w-48 lg:max-w-64'>
             <AppLogoHeader url='/' color='W' />
-          </Link>
+          </div>
           <div className='flex-1 flex flex-wrap gap-8 lg:gap-16 gap-y-8'>
             <ul className='flex flex-col gap-2 pr-4'>
               <h4 className='font-bold'>Menu</h4>
