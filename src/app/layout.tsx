@@ -23,8 +23,14 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: APP_NAME,
+  title: {
+    default: APP_NAME,
+    template: `%s | Leverage AI to automate your recruitment process.`,
+  },
   description: 'Leverage AI to automate your recruitment process.',
+  twitter: {
+    card: 'summary_large_image',
+  },
 };
 
 export default async function RootLayout({
