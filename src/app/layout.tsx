@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { Quicksand, Poppins } from 'next/font/google';
+import { Poppins } from 'next/font/google';
+// import { Quicksand, Poppins } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
 import { Toaster } from '@/components/ui/sonner';
@@ -12,10 +13,10 @@ import { createClient } from '@/lib/supabase/server';
  * TODO: Maybe i can add iframe functionality to allow companies to host their campaign application portal page.
  */
 
-const quicksand = Quicksand({
-  weight: ['300', '400', '500', '600', '700'],
-  subsets: ['latin'],
-});
+// const quicksand = Quicksand({
+//   weight: ['300', '400', '500', '600', '700'],
+//   subsets: ['latin'],
+// });
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
