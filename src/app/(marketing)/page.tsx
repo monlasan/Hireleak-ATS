@@ -11,6 +11,8 @@ import Image from 'next/image';
 import HeaderBackground from '@/components/HeaderBackground';
 import { StickyScroll } from '@/components/ui/sticky-scroll-reveal';
 import Footer from '@/components/Footer';
+import Features from '@/components/Features';
+import HowItWorks from '@/components/HowItWorks';
 
 // const poppins = Poppins({
 //   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -27,15 +29,15 @@ export default function Home() {
             <div className='flex items-center gap-16'>
               <AppLogoHeader url='/' hideLabel={true} />
               <nav>
-                <ul className='flex items-center gap-6'>
-                  <li>
+                <ul className='flex items-center gap-8'>
+                  {/* <li>
                     <Link href='/'>About</Link>
                   </li>
                   <li>
                     <Link href='/'>Pricing</Link>
-                  </li>
+                  </li> */}
                   <li>
-                    <Link href='/'>Features</Link>
+                    <Link href='/#features'>Features</Link>
                   </li>
                 </ul>
               </nav>
@@ -100,7 +102,7 @@ export default function Home() {
             {/* <div></div> */}
           </MaxWidthWrapper>
         </section>
-        <section className='pb-10 '>
+        <section className=''>
           <MaxWidthWrapper>
             <img
               src='/landing-hero-image.jpeg'
@@ -109,8 +111,35 @@ export default function Home() {
             />
           </MaxWidthWrapper>
         </section>
+        <Features />
+        <HowItWorks />
+        {/* <section>
+          <MaxWidthWrapper>
+            <h2>
+              How <span>Hireleak</span> work ?
+            </h2>
+            <div className='flex items-center'>
+              <div className='relative overflow-hidden w-40 h-40 flex items-center justify-center bg-blue-300 rounded-xl'>
+                <Image
+                  src='/landing-hero-image.jpeg'
+                  alt='Software dashboard'
+                  fill
+                  className='object-cover m-3'
+                />
+              </div>
+              <div>
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Deleniti ipsam quia minus saepe dolorem illum. Maxime
+                  architecto labore fuga deleniti minus modi, magnam, error hic
+                  ab, nam sapiente non nostrum.
+                </p>
+              </div>
+            </div>
+          </MaxWidthWrapper>
+        </section> */}
       </main>
-      <section className='py-16 bg-primary'>
+      <section className='py-24 bg-primary'>
         <MaxWidthWrapper className='justify-center gap-6 flex flex-col'>
           <h2 className='text-3xl font-bold text-white text-center'>
             Start your recruitment campaign now.

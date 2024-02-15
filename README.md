@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<br/>
+<br/>
+<div align="center">
+  <a href="https://hireleak.vercel.app">
+    <img src="public/Hireleak-BRAND.png" alt="Logo Hireleak" width="80" height="80">
+  </a>
+  <h3 align="center">Hireleak</h3>
+  <p align="center">
+    An AI-Powered Applicant Tracking System to help process.
+    <br />
+    <br />
+    <a href="https://hireleak.vercel.app">Learn more about Hireleak</a>
+    ·
+    <a href="https://hireleak.vercel.app/sign-in">Try Hireleak</a>
+  </p>
+</div>
+<br/>
 
-## Getting Started
+## About Hireleak
 
-First, run the development server:
+Hireleak is a simple and opinionated Applicant Tracking System (ATS) powered by AI software designed to streamline and optimize your recruitment efforts.
+
+<div align="center">
+<img src="public/hireleak-gitHub-banner.jpg" alt="Hireleak presentation banner">
+</div>
+<br/>
+
+## Features
+
+- 🤖 **AI-Powered Candidate Evaluation:** Utilize AI algorithms to analyze resumes and rank candidates based on customizable acceptance criteria, ensuring efficient screening of applicants.
+
+- 📥 **Embedded Application Form:** Seamlessly embed the applicant submission form on organization websites using an iframe tag, providing a unified application experience for candidates and simplifying the application process.
+
+- 📈 **Real-Time Applicant Tracking and Collaboration:** Track applicant submissions in real-time and facilitate collaboration among recruiters within the organization through a centralized workspace, streamlining communication and decision-making.
+
+## Getting started
+
+To get started with this project:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/monlasan/Hireleak-ATS.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+and copy the .env.sample variables into a separate .env file, fill them out and following run the commands:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  yarn install
+  yarn dev
+  yarn build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Tech stack
 
-## Learn More
+- NextJS / React
+- Supabase
+- LangchainJS
+- OpenAI
+- VercelAI SDK
+- ShadCN UI
+- Tailwind CSS
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Contributions are welcome! Please follow the contribution guidelines when making changes to the project.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
+This project is licensed under the MIT License.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contact
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[@monlasan](https://twitter.com/monla_san)

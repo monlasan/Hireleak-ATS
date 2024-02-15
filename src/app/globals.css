@@ -55,6 +55,7 @@
 @layer base {
   * {
     @apply border-border;
+    scroll-padding-top: 4em;
   }
   html {
     min-width: 360px;

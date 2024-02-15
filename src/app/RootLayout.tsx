@@ -1,37 +1,7 @@
-import type { Metadata } from 'next';
-import { Quicksand, Poppins } from 'next/font/google';
-import './globals.css';
 import Link from 'next/link';
 import { Toaster } from '@/components/ui/sonner';
 import Providers from '@/components/Providers';
-import { APP_NAME } from '@/lib/constants';
-import { cookies } from 'next/headers';
-import { createClient } from '@/lib/supabase/server';
-
-/**
- * TODO: Maybe i can add iframe functionality to allow companies to host their campaign application portal page.
- */
-
-const quicksand = Quicksand({
-  weight: ['300', '400', '500', '600', '700'],
-  subsets: ['latin'],
-});
-
-const poppins = Poppins({
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  subsets: ['latin'],
-});
-
-export const metadata: Metadata = {
-  title: {
-    default: APP_NAME,
-    template: `%s | Leverage AI to automate your recruitment process.`,
-  },
-  description: 'Leverage AI to automate your recruitment process.',
-  twitter: {
-    card: 'summary_large_image',
-  },
-};
+import { poppins } from './layout';
 
 export default async function RootLayout({
   children,
@@ -41,11 +11,10 @@ export default async function RootLayout({
   // const cookieStore = cookies();
   // const supabase = createClient(cookieStore);
   // const { data, error } = await supabase.auth.getUser();
-
   return (
     <html lang='en' suppressHydrationWarning className='relative'>
       <body className={`${poppins.className} antialiased`}>
-        {/* <div className='flex text-xs overflow-hidden items-center gap-4 z-50 fixed bottom-0 left-0 right-0 bg-zinc-50/10'>
+        <div className='flex text-xs overflow-hidden items-center gap-4 z-50 fixed bottom-0 left-0 right-0 bg-zinc-50/10'>
           <Link href='/'>Home</Link>
           <Link href='/dashboard'>Dashboard</Link>
           <Link href='/sign-in'>SignIn</Link>
@@ -54,7 +23,7 @@ export default async function RootLayout({
           <Link href='/apply/mainfo/senior-backend-react-developer'>
             PORTAL
           </Link>
-        </div> */}
+        </div>
         {/* <Providers user={data.user}> */}
         <Providers>
           {children}
