@@ -73,14 +73,14 @@ const HowItWorks = () => {
   // ];
   return (
     <section id='features' className='py-8 bg-white'>
-      <div className='max-w-6xl px-4 mx-auto flex flex-col gap-4'>
-        <h3 className='text-4xl font-bold mb-16'>How it works.</h3>
+      <div className='max-w-6xl px-4 mx-auto text-center items-center flex flex-col gap-4'>
+        <h3 className='text-4xl font-bold mb-10'>How it works</h3>
 
         <div className='max-w-4xl mx-auto flex flex-col gap-24'>
-          <div className='flex items-center gap-16 gap-y-8'>
+          <div className='flex flex-col md:flex-row items-center gap-16 gap-y-8'>
             <div className='w-80 h-80 aspect-square rounded-lg bg-primary'></div>
             <div className='text-left flex flex-col gap-4'>
-              <h3 className='text-2xl font-semibold'>Title of the process</h3>
+              <h3 className='text-2xl font-semibold'>How it works</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Corrupti accusantium ducimus laudantium, cumque officia delectus

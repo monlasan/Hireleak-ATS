@@ -105,14 +105,14 @@ export default function Home() {
         <section className=''>
           <MaxWidthWrapper>
             <img
-              src='/landing-hero-image.jpeg'
+              src='/hireleak-gitHub-banner.jpg'
               alt='Software dashboard'
-              className='border rounded relative -mt-16 sm:-mt-36 '
+              className='shadow rounded relative w-full -mt-16 sm:-mt-36 '
             />
           </MaxWidthWrapper>
         </section>
         <Features />
-        <HowItWorks />
+        {/* <HowItWorks /> */}
         {/* <section>
           <MaxWidthWrapper>
             <h2>

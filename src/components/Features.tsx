@@ -29,21 +29,21 @@ const Features = () => {
       text: 'Track applicant submissions in real-time and facilitate collaboration among recruiters within the organization through a centralized workspace, streamlining communication and decision-making.',
       icon: <UserCog />,
     },
-    {
-      title: 'Comprehensive Insights Dashboard',
-      text: 'Access detailed insights and analytics on campaign performance, applicant demographics, and acceptance rates through a comprehensive dashboard, enabling data-driven decision-making and performance monitoring.',
-      icon: <Gauge />,
-    },
-    {
-      title: 'Automated Communication and Workflow',
-      text: 'Set up automated communication workflows to send personalized notifications and updates to applicants at various stages of the recruitment process, enhancing candidate experience and streamlining communication efforts.',
-      icon: <Workflow />,
-    },
-    {
-      title: 'Secure and Scalable Infrastructure',
-      text: 'Ensure the highest level of data security and compliance while benefiting from a scalable infrastructure that can accommodate a growing number of campaigns and applicants, ensuring reliability and responsiveness under heavy usage.',
-      icon: <ShieldCheck />,
-    },
+    // {
+    //   title: 'Comprehensive Insights Dashboard',
+    //   text: 'Access detailed insights and analytics on campaign performance, applicant demographics, and acceptance rates through a comprehensive dashboard, enabling data-driven decision-making and performance monitoring.',
+    //   icon: <Gauge />,
+    // },
+    // {
+    //   title: 'Automated Communication and Workflow',
+    //   text: 'Set up automated communication workflows to send personalized notifications and updates to applicants at various stages of the recruitment process, enhancing candidate experience and streamlining communication efforts.',
+    //   icon: <Workflow />,
+    // },
+    // {
+    //   title: 'Secure and Scalable Infrastructure',
+    //   text: 'Ensure the highest level of data security and compliance while benefiting from a scalable infrastructure that can accommodate a growing number of campaigns and applicants, ensuring reliability and responsiveness under heavy usage.',
+    //   icon: <ShieldCheck />,
+    // },
   ];
   //   {
   //     title: 'Effortless Collaboration',
@@ -75,9 +75,8 @@ const Features = () => {
     <section id='features' className='py-16 bg-white'>
       <div className='max-w-6xl px-4 mx-auto text-center items-center flex flex-col gap-4'>
         <h3 className='text-4xl font-bold'>All the features you need.</h3>
-        <p className='text-lg max-w-xl mb-4 opacity-65'>
-          Everything you need to take data-driven decision during your
-          recruitment efforts.
+        <p className='text-lg max-w-96 mb-4 opacity-65'>
+          We are constantly evolving Hireleak to provide what our users want.
         </p>
         <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-8 mt-3'>
           {features.map((feature, idx) => (
