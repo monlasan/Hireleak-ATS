@@ -74,7 +74,7 @@ const Features = () => {
   return (
     <section id='features' className='py-16 bg-white'>
       <div className='max-w-6xl px-4 mx-auto text-center items-center flex flex-col gap-4'>
-        <h3 className='text-4xl font-bold'>All the features you need.</h3>
+        <h3 className='text-4xl font-bold'>Features</h3>
         <p className='text-lg max-w-96 mb-4 opacity-65'>
           We are constantly evolving Hireleak to provide what our users want.
         </p>
