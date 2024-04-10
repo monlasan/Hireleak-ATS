@@ -11,14 +11,13 @@ import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { PromptTemplate } from 'langchain/prompts';
 import { LLMChain } from 'langchain/chains';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
-import { FormDataEncoder } from 'form-data-encoder';
 
 export async function processCampaignResumes(
   resume_url: string,
   job_description: string,
   acceptance_percentage: string
 ) {
-  console.log(FormDataEncoder);
+  // console.log(FormDataEncoder);
   // const cookieStore = cookies();
   // const supabase = createClient(cookieStore);
   const response = await fetch(resume_url);
