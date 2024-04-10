@@ -9,6 +9,8 @@ import { sanitizeText } from '../utils';
 // ---
 import { PromptTemplate } from 'langchain/prompts';
 
+import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
+
 export async function processCampaignResumes(
   resume_url: string,
   job_description: string,
