@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "target": "ES2020", // or higher
+    // "module": "nodenext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
