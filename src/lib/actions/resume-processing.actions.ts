@@ -64,10 +64,10 @@ export async function processCampaignResumes(
     apiKey: 'AIzaSyAH7jL7l2_mfsC1VA0rjKC62N4v5pzhdQw',
     modelName: 'gemini-pro',
   });
-  // const llmChain = new LLMChain({
-  //   llm: geminiModel,
-  //   prompt: promptTemplate,
-  // });
+  const llmChain = new LLMChain({
+    llm: geminiModel,
+    prompt: promptTemplate,
+  });
   // const result = await llmChain.call({
   //   resume: sanitized_resume,
   //   job_description,
