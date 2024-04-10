@@ -17,17 +17,13 @@ export async function processCampaignResumes(
   job_description: string,
   acceptance_percentage: string
 ) {
-  //   console.log(ChatGoogleGenerativeAI);
-  //   console.log(PromptTemplate);
-  //   console.log(LLMChain);
-  //   console.log(PDFLoader);
-  //   // console.log(FormDataEncoder);
-  //   // const cookieStore = cookies();
-  //   // const supabase = createClient(cookieStore);
-  //   const response = await fetch(resume_url);
-  //   const blob = await response.blob();
-  //   const loader = new PDFLoader(blob);
-  //   const pageLevelDocs = await loader.load();
+  // console.log(FormDataEncoder);
+  // const cookieStore = cookies();
+  // const supabase = createClient(cookieStore);
+  const response = await fetch(resume_url);
+  const blob = await response.blob();
+  const loader = new PDFLoader(blob);
+  const pageLevelDocs = await loader.load();
   //   const sanitized_resume = sanitizeText(pageLevelDocs[0].pageContent);
   //   const template = `
   // As a seasoned Applicant Tracking System (ATS) analyst with expertise in technology, software engineering, data science, and big data engineering, your primary responsibility is to meticulously evaluate resumes against provided job descriptions. In a highly competitive job market, you're tasked with ensuring top-notch assistance for resume improvement.
