@@ -209,7 +209,7 @@
     zod "^3.22.3"
     zod-to-json-schema "^3.22.5"
 
-"@langchain/core@0.1.5", "@langchain/core@~0.1.1", "@langchain/core@~0.1.44", "@langchain/core@~0.1.45":
+"@langchain/core@~0.1.1":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@langchain/core/-/core-0.1.5.tgz#f63a2cd5a18fe68806d0421d00824f0dcdd68a4b"
   integrity sha512-5RdZpbadMYXTKdZrWZ6JeYT09BZssprg+komE+FbXxW+kbGE0QJJaj8dnzPNdzVCAhDLQQTOV2CAM+vOLsaxzQ==
@@ -225,6 +225,23 @@
     uuid "^9.0.0"
     zod "^3.22.3"
 
+"@langchain/core@~0.1.44", "@langchain/core@~0.1.45":
+  version "0.1.55"
+  resolved "https://registry.yarnpkg.com/@langchain/core/-/core-0.1.55.tgz#7d627ed1b19fc40da2e116400235d830248c5e1f"
+  integrity sha512-X08bvFp5/hVNR0xzcxT5MHKdJJZPr0IpfGSB/FPZK2dw77kaBKor0FKb80qe+pzVTgmfT9L29m/v0eph6P1deQ==
+  dependencies:
+    ansi-styles "^5.0.0"
+    camelcase "6"
+    decamelize "1.2.0"
+    js-tiktoken "^1.0.8"
+    langsmith "~0.1.7"
+    ml-distance "^4.0.0"
+    p-queue "^6.6.2"
+    p-retry "4"
+    uuid "^9.0.0"
+    zod "^3.22.4"
+    zod-to-json-schema "^3.22.3"
+
 "@langchain/google-genai@^0.0.3":
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/@langchain/google-genai/-/google-genai-0.0.3.tgz#4bf5ce8e4889db435a3ab7aac4cc0a28629101fc"
@@ -232,17 +249,6 @@
   dependencies:
     "@google/generative-ai" "^0.1.0"
     "@langchain/core" "~0.1.1"
-
-"@langchain/openai@^0.0.27":
-  version "0.0.27"
-  resolved "https://registry.yarnpkg.com/@langchain/openai/-/openai-0.0.27.tgz#dfea33c55deb96c4a7400332888815b70043cadc"
-  integrity sha512-yPwJ/8YEK2dvsPi+4LiohYF1/MLvry9IE+w2B4CHD+bVOupGG62300QZkxXV241YytyYGC1PvI/EzBPoJCvEKQ==
-  dependencies:
-    "@langchain/core" "~0.1.45"
-    js-tiktoken "^1.0.7"
-    openai "^4.32.1"
-    zod "^3.22.4"
-    zod-to-json-schema "^3.22.3"
 
 "@langchain/openai@~0.0.19", "@langchain/openai@~0.0.5":
   version "0.0.26"
@@ -3211,7 +3217,7 @@ langsmith@~0.0.48:
     p-retry "4"
     uuid "^9.0.0"
 
-langsmith@~0.1.1:
+langsmith@~0.1.1, langsmith@~0.1.7:
   version "0.1.14"
   resolved "https://registry.yarnpkg.com/langsmith/-/langsmith-0.1.14.tgz#2b889dbcfb49547614df276a4a5a063092a1585d"
   integrity sha512-iEzQLLB7/0nRpAwNBAR7B7N64fyByg5UsNjSvLaCCkQ9AS68PSafjB8xQkyI8QXXrGjU1dEqDRoa8m4SUuRdUw==
