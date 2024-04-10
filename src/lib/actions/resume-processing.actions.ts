@@ -9,6 +9,7 @@ import { sanitizeText } from '../utils';
 // ---
 import { PromptTemplate } from 'langchain/prompts';
 import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
+import { LLMChain } from 'langchain/chains';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 
 export async function processCampaignResumes(
