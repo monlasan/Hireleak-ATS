@@ -6,26 +6,26 @@ import { cookies } from 'next/headers';
 import { type Campaign } from '../types';
 import { redirect } from 'next/navigation';
 import { sanitizeText } from '../utils';
-// ---
-import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
-import { PromptTemplate } from '@langchain/core/prompts';
-import { LLMChain } from 'langchain/chains';
-import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
+// // ---
+// import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
+// import { PromptTemplate } from '@langchain/core/prompts';
+// import { LLMChain } from 'langchain/chains';
+// import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 
 export async function processCampaignResumes(
   resume_url: string,
   job_description: string,
   acceptance_percentage: string
 ) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  // const cookieStore = cookies();
+  // const supabase = createClient(cookieStore);
 
-  const response = await fetch(resume_url);
-  const blob = await response.blob();
-  const loader = new PDFLoader(blob);
-  const pageLevelDocs = await loader.load();
+  // const response = await fetch(resume_url);
+  // const blob = await response.blob();
+  // const loader = new PDFLoader(blob);
+  // const pageLevelDocs = await loader.load();
 
-  const sanitized_resume = sanitizeText(pageLevelDocs[0].pageContent);
+  // const sanitized_resume = sanitizeText(pageLevelDocs[0].pageContent);
   const template = `
 As a seasoned Applicant Tracking System (ATS) analyst with expertise in technology, software engineering, data science, and big data engineering, your primary responsibility is to meticulously evaluate resumes against provided job descriptions. In a highly competitive job market, you're tasked with ensuring top-notch assistance for resume improvement.
 
@@ -69,26 +69,26 @@ candidate_pass: A boolean value ("true" or "false") indicating whether the candi
 Please provide the response in a single string adhering to this structure.
 `;
 
-  const promptTemplate = new PromptTemplate({
-    template,
-    inputVariables: ['resume', 'job_description'],
-  });
+  // const promptTemplate = new PromptTemplate({
+  //   template,
+  //   inputVariables: ['resume', 'job_description'],
+  // });
 
-  const geminiModel = new ChatGoogleGenerativeAI({
-    apiKey: 'AIzaSyAH7jL7l2_mfsC1VA0rjKC62N4v5pzhdQw',
-    modelName: 'gemini-pro',
-  });
+  // const geminiModel = new ChatGoogleGenerativeAI({
+  //   apiKey: 'AIzaSyAH7jL7l2_mfsC1VA0rjKC62N4v5pzhdQw',
+  //   modelName: 'gemini-pro',
+  // });
 
-  const llmChain = new LLMChain({
-    llm: geminiModel,
-    prompt: promptTemplate,
-  });
+  // const llmChain = new LLMChain({
+  //   llm: geminiModel,
+  //   prompt: promptTemplate,
+  // });
 
-  const result = await llmChain.call({
-    resume: sanitized_resume,
-    job_description,
-  });
-  console.log('🔴LLCHAIN RESULT PAYLOAD', result);
+  // const result = await llmChain.call({
+  //   resume: sanitized_resume,
+  //   job_description,
+  // });
+  // console.log('🔴LLCHAIN RESULT PAYLOAD', result);
 
-  return JSON.stringify(result.text);
+  // return JSON.stringify(result.text);
 }
