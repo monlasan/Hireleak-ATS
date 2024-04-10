@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 import { sanitizeText } from '../utils';
 // ---
 import { PromptTemplate } from 'langchain/prompts';
-
+import { ChatGoogleGenerativeAI } from '@langchain/google-genai';
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf';
 
 export async function processCampaignResumes(
