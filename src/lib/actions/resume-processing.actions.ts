@@ -17,8 +17,8 @@ export async function processCampaignResumes(
   job_description: string,
   acceptance_percentage: string
 ) {
-  // const cookieStore = cookies();
-  // const supabase = createClient(cookieStore);
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
 
   const response = await fetch(resume_url);
   const blob = await response.blob();
