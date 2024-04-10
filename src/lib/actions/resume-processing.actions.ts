@@ -60,10 +60,10 @@ export async function processCampaignResumes(
     template,
     inputVariables: ['resume', 'job_description'],
   });
-  // const geminiModel = new ChatGoogleGenerativeAI({
-  //   apiKey: 'AIzaSyAH7jL7l2_mfsC1VA0rjKC62N4v5pzhdQw',
-  //   modelName: 'gemini-pro',
-  // });
+  const geminiModel = new ChatGoogleGenerativeAI({
+    apiKey: 'AIzaSyAH7jL7l2_mfsC1VA0rjKC62N4v5pzhdQw',
+    modelName: 'gemini-pro',
+  });
   // const llmChain = new LLMChain({
   //   llm: geminiModel,
   //   prompt: promptTemplate,
